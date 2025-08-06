@@ -50,7 +50,89 @@
 {{> "post/comments"}}
 
 {{!-- Inject Table of Contents Script --}}
-<script type="module" src="{{asset 'js/toc.js'}}"></script>
+<script>
+// TOC Simple sans modules ES6
+document.addEventListener('DOMContentLoaded', function() {
+    const tocContainer = document.querySelector('.toc');
+    const headings = document.querySelectorAll('.gh-content h1, .gh-content h2, .gh-content h3, .gh-content h4, .gh-content h5, .gh-content h6');
+    
+    if (tocContainer && headings.length > 0) {
+        // Supprimer la classe toc-hidden
+        tocContainer.classList.remove('toc-hidden');
+        
+        // Créer la structure TOC
+        const tocTitle = document.createElement('div');
+        tocTitle.className = 'toc-title';
+        tocTitle.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="1.25" y1="4.25" x2="10.75" y2="4.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                <line x1="3.25" y1="8.25" x2="12.75" y2="8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                <line x1="5.25" y1="12.25" x2="14.75" y2="12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+            </svg>
+            On this page
+        `;
+        
+        const tocList = document.createElement('ul');
+        
+        headings.forEach((heading, index) => {
+            // S'assurer que chaque titre a un ID
+            if (!heading.id) {
+                const id = heading.textContent.toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '') || `heading-${index}`;
+                heading.id = id;
+            }
+            
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${heading.id}`;
+            a.textContent = heading.textContent.trim();
+            a.className = 'toc-link';
+            
+            // Gestion des niveaux de titre
+            const level = parseInt(heading.tagName.charAt(1));
+            li.style.marginLeft = `${(level - 2) * 15}px`;
+            
+            li.appendChild(a);
+            tocList.appendChild(li);
+        });
+        
+        // Vider le conteneur et ajouter le nouveau contenu
+        tocContainer.innerHTML = '';
+        tocContainer.appendChild(tocTitle);
+        tocContainer.appendChild(tocList);
+        
+        // Gestion du scroll actif
+        let ticking = false;
+        function updateActiveTOC() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const links = tocContainer.querySelectorAll('.toc-link');
+                    const headingsArray = Array.from(headings);
+                    
+                    let activeIndex = -1;
+                    for (let i = headingsArray.length - 1; i >= 0; i--) {
+                        if (headingsArray[i].getBoundingClientRect().top <= 100) {
+                            activeIndex = i;
+                            break;
+                        }
+                    }
+                    
+                    links.forEach((link, index) => {
+                        link.classList.toggle('active', index === activeIndex);
+                    });
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', updateActiveTOC);
+        updateActiveTOC();
+    }
+});
+</script>
 
 
 {{/post}}
