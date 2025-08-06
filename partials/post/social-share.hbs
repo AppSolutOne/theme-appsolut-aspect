@@ -1,0 +1,47 @@
+{{!-- X. --}}
+<li>
+	<a class="nav-link" href="https://x.com/intent/tweet?url={{encode url absolute=true}}&text={{encode title}}" rel="noopener" target="_blank">
+		{{> "icons-social/twitter"}}
+		<span class="label">{{t 'Share on X'}}</span>
+	</a>
+</li>
+
+{{!-- Facebook. --}}
+<li>
+	<a class="nav-link" href="https://www.facebook.com/sharer/sharer.php?u={{encode url absolute=true}}&quote={{encode title}}" rel="noopener" target="_blank">
+		{{> "icons-social/facebook"}}
+		<span class="label">{{t 'Share on Facebook'}}</span>
+	</a>
+</li>
+
+{{!-- LinkedIn. --}}
+<li>
+	<a class="nav-link" href="https://www.linkedin.com/sharing/share-offsite/?url={{encode url absolute=true}}&summary={{encode title}}" rel="noopener" target="_blank">
+		{{> "icons-social/linkedin"}}
+		<span class="label">{{t 'Share on LinkedIn'}}</span>
+	</a>
+</li>
+
+{{!-- Pinterest. --}}
+<li>
+	<a class="nav-link" href="https://www.pinterest.com/pin/create/button/?url={{encode url absolute=true}}&description={{encode title}}" rel="noopener" target="_blank">
+		{{> "icons-social/pinterest"}}
+		<span class="label">{{t 'Share on Pinterest'}}</span>
+	</a>
+</li>
+
+{{!-- Email. --}}
+<li>
+	<a class="nav-link" href="mailto:?subject={{encode title}}&body={{encode url absolute=true}}" rel="noopener" target="_blank">
+		{{> "icons/mail"}}
+		<span class="label">{{t 'Email'}}</span>
+	</a>
+</li>
+
+{{!-- Copy link. --}}
+<li>
+	<button class="nav-link" data-clipboard-text="{{url absolute=true}}">
+		{{> "icons/link"}}
+		<span class="label">{{t 'Copy link'}}</span>
+	</button>
+</li>

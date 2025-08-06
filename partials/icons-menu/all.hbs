@@ -1,0 +1,83 @@
+{{!-- Home. --}}
+{{#has slug='home'}}
+{{> "icons-menu/home"}}
+
+{{!-- Blog. --}}
+{{else has slug='writings'}}
+{{> "icons-menu/book-text"}}
+{{else has slug='blog'}}
+{{> "icons-menu/book-text"}}
+{{else has slug='news'}}
+{{> "icons-menu/book-text"}}
+{{else has slug='archive'}}
+{{> "icons-menu/book-text"}}
+{{else has slug='collection'}}
+{{> "icons-menu/book-text"}}
+
+{{!-- User. --}}
+{{else has slug='about'}}
+{{> "icons-menu/user"}}
+{{else has slug='account'}}
+{{> "icons-menu/user"}}
+
+{{!-- Users. --}}
+{{else has slug='authors'}}
+{{> "icons-menu/users"}}
+{{else has slug='members'}}
+{{> "icons-menu/users"}}
+
+{{!-- Mail. --}}
+{{else has slug="contact"}}
+{{> "icons-menu/mail"}}
+
+{{!-- Tag. --}}
+{{else has slug='categories'}}
+{{> "icons-menu/tag"}}
+{{else has slug='tags'}}
+{{> "icons-menu/tag"}}
+
+{{!-- Dollar. --}}
+{{else has slug='membership'}}
+{{> "icons-menu/dollar-circle"}}
+{{else has slug='pricing'}}
+{{> "icons-menu/dollar-circle"}}
+{{else has slug='plans'}}
+{{> "icons-menu/dollar-circle"}}
+
+{{!-- Log in. --}}
+{{else has slug='log-in'}}
+{{> "icons-menu/log-in"}}
+{{else has slug='login'}}
+{{> "icons-menu/log-in"}}
+{{else has slug='sign-in'}}
+{{> "icons-menu/log-in"}}
+{{else has slug='signin'}}
+{{> "icons-menu/log-in"}}
+{{else has slug='signup'}}
+{{> "icons-menu/log-in"}}
+{{else has slug='sign-up'}}
+{{> "icons-menu/log-in"}}
+{{else has slug='register'}}
+{{> "icons-menu/log-in"}}
+{{else has slug='registration'}}
+{{> "icons-menu/log-in"}}
+
+{{!-- Bell. --}}
+{{else has slug='subscribe'}}
+{{> "icons-menu/bell"}}
+{{else has slug='join'}}
+{{> "icons-menu/bell"}}
+
+{{!-- Recommendations. --}}
+{{else has slug='recommendations'}}
+{{> "icons-menu/thumbs-up"}}
+
+{{!-- Faq. --}}
+{{else has slug='faq'}}
+{{> "icons-menu/help-circle"}}
+
+{{!-- Default. --}}
+{{else}}
+{{> "icons-menu/file"}}
+
+{{/has}}

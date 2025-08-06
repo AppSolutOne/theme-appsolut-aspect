@@ -1,0 +1,26 @@
+{{#if hide_title}}
+	<h1 class="screen-reader-text">{{title}}</h1>
+{{else}}
+	<div class="section-hero{{#if feature_image}} has-feature-image{{/if}}">
+		{{#if feature_image}}
+			<figure class="section-hero-image">
+				{{> "components/image" fast="true" size=image_size src=feature_image alt=feature_image_alt altElse=title}}
+				{{#if feature_image_caption}}
+					<figcaption>{{feature_image_caption}}</figcaption>
+				{{/if}}
+			</figure>
+		{{/if}}
+
+		<div class="section-hero-content">
+			<h1>{{title}}</h1>
+
+			{{#if excerpt}}
+				<p>{{excerpt}}</p>
+			{{/if}}
+
+			{{#unless hide_subscription}}
+				{{> "form-subscribe" label=true}}
+			{{/unless}}
+		</div>
+	</div>
+{{/if}}

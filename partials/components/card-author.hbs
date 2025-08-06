@@ -1,0 +1,18 @@
+<div class="card card-author">
+	<div class="card-author-image">
+		<a class="card-author-image-link" href="{{url}}" aria-label="{{name}}" tabindex="-1">
+			{{~#if cover_image}}
+				{{> "components/image" src=cover_image size="200" alt=name}}
+			{{/if~}}
+		</a>
+
+		{{> "components/social-links-author" hide_label=true}}
+	</div>
+
+	<div class="card-author-content">
+		<h3 class="card-author-title"><a href="{{url}}">{{name}}</a></h3>
+		{{#if bio}}
+		<p>{{bio}}</p>
+		{{/if}}
+	</div>
+</div>

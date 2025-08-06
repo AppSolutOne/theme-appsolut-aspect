@@ -1,0 +1,10 @@
+<script>
+	// Set color scheme from local storage.
+	(function() {
+		const colorScheme = localStorage.getItem('color-scheme');
+
+		if (colorScheme) {
+			document.documentElement.setAttribute('data-color-scheme', colorScheme);
+		}
+	})();
+</script>

@@ -1,0 +1,51 @@
+{{#if custom_navigation}}
+	{{> "navigation/custom"}}
+{{else}}
+<ul{{#if class}} class="{{class}}"{{/if}}>
+	{{#foreach navigation}}
+		{{!-- Section. --}}
+		{{#match (concat label.[0] label.[1]) '# '}}
+			{{> "navigation/section" nav=../this item=this}}
+
+		{{!-- Separator. --}}
+		{{else match label '---'}}
+			{{> "navigation/separator" nav=../this item=this}}
+
+		{{!-- Processing regular menu items. --}}
+		{{else match (concat label.[0] label.[1]) '!=' '- ' ~}}
+			<li class="nav-item">
+
+			{{!-- Checking the next element. --}}
+			{{#if (lookup ../navigation @number) ~}}
+				{{#with (lookup ../navigation @number) as |next_item| ~}}
+					{{#match (concat next_item.label.[0] next_item.label.[1]) '- ' ~}}
+						{{> "navigation/toggle" nav=../../this item=../this}}
+						{{> "navigation/expandable" nav=../../this item=../this open_tag=true}}
+					{{else ~}}
+						{{> "navigation/link" nav=../../this item=../this}}
+						</li>
+					{{/match ~}}
+				{{/with ~}}
+			{{else ~}}
+				{{> "navigation/link" nav=../this item=this}}
+				</li>
+			{{/if ~}}
+
+		{{!-- Processing menu sub-items. --}}
+		{{else match (concat label.[0] label.[1]) '- ' ~}}
+			<li class="nav-item nav-item-sub">{{> "navigation/link" nav=../this item=this sub=true}}</li>
+
+			{{!-- Check the next item to close the dropdown list. --}}
+			{{~#if (lookup ../navigation @number) ~}}
+				{{#with (lookup ../navigation @number) as |next_item| ~}}
+					{{#match (concat next_item.label.[0] next_item.label.[1]) '!=' '- ' ~}}
+						{{> "navigation/expandable" nav=../../this item=../this open_tag=false}}</li>
+					{{/match ~}}
+				{{/with ~}}
+			{{else if @last ~}}
+				{{> "navigation/expandable" nav=../this item=this open_tag=false}}</li>
+			{{/if ~}}
+		{{/match ~}}
+	{{/foreach}}
+</ul>
+{{/if}}

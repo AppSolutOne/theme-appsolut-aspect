@@ -1,0 +1,37 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#page}}
+	{{!-- Hero. --}}
+	{{#if @page.show_title_and_feature_image}}
+		{{> "sections/hero" show_subscription=true image_size="600"}}
+	{{/if}}
+
+	{{!-- Content. --}}
+	{{#if html}}
+		<div class="post-content">{{content}}</div>
+	{{/if}}
+{{/page}}
+
+{{!-- Tags sections. --}}
+{{#> "get-tags" setting=@custom.tags_page_displaying_tags}}
+	{{#foreach tags}}
+		<section class="section section-tag">
+			<div class="section-head">
+				<h2 class="section-title"><a href="{{url}}">{{name}}</a><span {{#if accent_color}}style="color:{{accent_color}};"{{/if}}></span></h2>
+				{{#if description}}
+					<p>{{description}}</p>
+				{{/if}}
+			</div>
+
+			<a href="{{url}}" class="section-button button button-sm button-background-200">
+				<span class="label">{{t "View {tag}" tag=name}}</span>
+				{{> "icons/arrow-narrow-right"}}
+			</a>
+
+			{{#get "posts" limit=10 filter="tags:{{slug}}" include="authors,tags,tiers"}}
+				{{> "components/carousel-posts"}}
+			{{/get}}
+		</section>
+	{{/foreach}}
+{{/"get-tags"}}

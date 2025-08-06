@@ -1,0 +1,9 @@
+.post-content {
+	.lightbox img {
+		transition-property: transform, border-radius;
+	}
+
+	.lightbox.lightbox-show img {
+		border-radius: 0;
+	}
+}

@@ -1,0 +1,42 @@
+{{!--
+	Variables:
+	- type: "infinite" | "load-more" | "load-more-infinite"
+	- append: class name where to append posts
+	- prepend: class name where to prepend posts
+	- from: class name where to get posts from
+	- label: label button
+	- page: next or prev number page
+	- class: additional class name
+--}}
+{{#*inline "pagination-button"}}
+	<a
+		class="button button-transparent pagination-button{{#if class}} {{class}}{{/if}}"
+		href="{{#if href}}{{href}}{{else}}{{@site.url}}{{page_url page}}{{/if}}"
+		data-pagination="{{#if type}}{{type}}{{else}}load-more{{/if}}"
+		{{#if append}}data-pagination-append="{{append}}"{{/if}}
+		{{#if prepend}}data-pagination-prepend="{{prepend}}"{{/if}}
+		{{#if from}}data-pagination-from="{{from}}"{{/if}}
+	>
+		<span class="label">{{label}}</span>
+		<span class="loader">{{> "icons/loader"}}</span>
+		{{#if append}}<span class="complete">{{t "You've reached the end of the list"}}</span>{{/if}}
+	</a>
+{{/inline}}
+
+{{#if prev}}
+	{{> "pagination-button" class="pagination-button-prev" label=(t 'Previous Posts') page=prev append=false}}
+{{/if}}
+{{#if next}}
+	{{> "pagination-button" class="pagination-button-next" label=(t 'Load More') page=next prepend=false}}
+
+	{{#match style "!=" "list"}}
+	<span class="pagination-decorative-posts">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</span>
+	{{/match}}
+{{/if}}

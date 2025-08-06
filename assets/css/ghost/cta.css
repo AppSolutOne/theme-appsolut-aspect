@@ -1,0 +1,114 @@
+.post-content {
+	.kg-cta-card {
+		border-radius: var(--radius-4);
+	}
+
+	/* Sponsored. */
+	.kg-cta-sponsor-label-wrapper {
+		padding: var(--spacing-7) 0;
+		margin: 0 var(--spacing-8);
+	}
+
+	.kg-cta-sponsor-label {
+		font-family: inherit;
+		font-size: var(--font-x-small);
+		font-weight: var(--font-weight-semibold);
+	}
+
+	/* Image. */
+	.kg-cta-image-container img {
+		border-radius: var(--radius-3);
+	}
+
+	/* Content. */
+	.kg-cta-content {
+		padding: var(--spacing-7) var(--spacing-8) var(--spacing-8);
+		gap: var(--spacing-8);
+	}
+
+	.kg-cta-has-img .kg-cta-content {
+		padding-top: var(--spacing-8);
+	}
+
+	/* Content inner. */
+	.kg-cta-content-inner {
+		gap: var(--spacing-8);
+	}
+
+	/* Text. */
+	.kg-cta-text p {
+		line-height: inherit;
+	}
+
+	/* Button. */
+	.kg-cta-has-img .kg-cta-button {
+		margin-bottom: var(--spacing-2);
+	}
+
+	.kg-cta-button {
+		align-self: flex-start;
+		width: auto;
+
+		&:hover {
+			opacity: var(--button-hover--opacity);
+		}
+	}
+
+	/*
+	 * Colors.
+	 */
+
+	/* White. */
+	.kg-cta-bg-white {
+		background-color: var(--color-background);
+		box-shadow: none;
+		border: 1px solid var(--color-border);
+
+		.kg-cta-sponsor-label-wrapper {
+			border-color: var(--color-border);
+		}
+
+		.kg-cta-sponsor-label {
+			color: var(--color-contrast);
+
+			a:hover {
+				color: var(--ghost-accent-color);
+				opacity: 1;
+			}
+		}
+
+		.kg-cta-sponsor-label span:not(a span) {
+			color: var(--color-secondary);
+		}
+	}
+
+	/* Grey. */
+	.kg-cta-bg-grey {
+		background-color: var(--color-background-100);
+
+		.kg-cta-sponsor-label {
+			color: var(--color-contrast);
+		}
+	}
+
+	/*
+	 * Button colors.
+	 */
+
+	/* Black. */
+	.kg-cta-button[style='background-color: #000000; color: #FFFFFF;'] {
+		color: var(--color-background) !important;
+		background-color: var(--color-contrast) !important;
+	}
+
+	/* Grey. */
+	.kg-cta-button[style='background-color: #F0F0F0; color: #000000;'] {
+		color: var(--color-contrast) !important;
+		background-color: var(--color-background-300) !important;
+	}
+
+	/* Accent. */
+	.kg-cta-button.kg-style-accent {
+		color: var(--color-accent-foreground) !important;
+	}
+}

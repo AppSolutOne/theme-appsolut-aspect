@@ -1,0 +1,13 @@
+{{#match size "anonymous"}}
+	<span class="avatar">
+		{{> "icons-menu/user"}}
+	</span>
+{{else match size "large"}}
+	<span class="avatar avatar-large"{{#if name}} data-avatar-name="{{name.[0]}}"{{/if}}>
+		{{#if src}}{{> "components/image" size="46" fast=true src=src alt=name}}{{/if}}
+	</span>
+{{else}}
+	<span class="avatar"{{#if name}} data-avatar-name="{{name.[0]}}"{{/if}}>
+		{{#if src}}{{> "components/image" size="36" fast=true src=src alt=name}}{{/if}}
+	</span>
+{{/match}}

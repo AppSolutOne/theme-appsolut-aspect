@@ -1,0 +1,21 @@
+routes:
+  /signup/:
+    template: signup
+    # data: page.signup # When active data will be taken from the  "/signup/" page
+  /signin/:
+    template: signin
+    # data: page.signin # When active data will be taken from the  "/signin/" page
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: index
+  /archive/:
+    permalink: /{slug}/
+    template: archive
+    # data: page.archive # When active data will be taken from the  "/archive/" page
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/
+  

@@ -1,0 +1,6 @@
+.slider-cards-author .swiper-slide,
+.slider-cards-author .slider-button-wrapper {
+	@media (--breakpoint-max-xs) {
+		width: 212px;
+	}
+}

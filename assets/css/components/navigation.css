@@ -1,0 +1,155 @@
+/* Base. */
+:where(.navigation, .navigation-dropdown) {
+	--nav--gap: var(--spacing-1);
+
+	/* Dropdown. */
+	--nav--dropdown--gap: var(--spacing-1);
+
+	/* Link. */
+	--nav--link--min-height: 2.375rem; /* 38px. */
+	--nav--link--padding-v: var(--spacing-4);
+	--nav--link--padding-h: var(--spacing-6);
+	--nav--link--gap: var(--spacing-7);
+	--nav--link--font-size: var(--font-small);
+	--nav--link--border-radius: var(--radius-3);
+	--nav--link--color: var(--color-contrast);
+	--nav--link--background-color: transparent;
+	--nav--link-hover--color: var(--color-contrast);
+	--nav--link-hover--background-color: var(--color-background-200);
+
+	/* Link icon. */
+	--nav--link--icon--size: 1.25rem;
+	--nav--link--icon--color: var(--color-secondary);
+	--nav--link--icon-hover--color: var(--color-contrast);
+
+	/* Separator. */
+	--nav--separator--margin: var(--spacing-6);
+	--nav--separator--border: 1px solid var(--color-border);
+
+	position: relative;
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	> ul {
+		display: flex;
+		gap: var(--nav--gap);
+	}
+
+	/* Link. */
+	.nav-link,
+	.social-link {
+		position: relative;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		gap: var(--nav--link--gap);
+		padding: var(--nav--link--padding-v) var(--nav--link--padding-h);
+		min-height: var(--nav--link--min-height);
+		color: var(--nav--link--color);
+		background-color: var(--nav--link--background-color);
+		font-size: var(--nav--link--font-size);
+		font-weight: var(--font-weight-medium);
+		text-decoration: none;
+		line-height: initial;
+		background-clip: padding-box;
+		overflow: hidden;
+		border: 0;
+		border-radius: var(--nav--link--border-radius);
+		z-index: 1;
+		transition:
+			color 0.1s,
+			background-color 0.1s;
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-color: transparent;
+			border: 1px solid var(--color-border);
+			border-radius: inherit;
+			opacity: 0;
+			transition:
+				opacity 0.8s ease,
+				background-color 0.5s ease;
+			z-index: -1;
+		}
+
+		> svg {
+			flex: 0 0 auto;
+			width: var(--nav--link--icon--size);
+			height: var(--nav--link--icon--size);
+			color: var(--nav--link--icon--color);
+			transition: color 0.3s;
+		}
+
+		&:not(.nav-link-current):active {
+			color: var(--nav--link-hover--color);
+
+			&::before {
+				opacity: 1;
+				border-color: var(--color-background-300);
+				background-color: var(--color-background-300);
+				transition:
+					opacity 0.05s,
+					background-color 0.05s;
+			}
+		}
+	}
+
+	/* For copy link. */
+	button.nav-link {
+		cursor: pointer;
+	}
+
+	/* Hover and current. */
+	.nav-item:hover > a.nav-link,
+	a.nav-link:hover,
+	a.nav-link:focus-visible,
+	a.nav-link.hover,
+	a.social-link:hover,
+	a.social-link:focus-visible,
+	button.nav-link.hover,
+	button.nav-link:hover,
+	button.nav-link:focus-visible,
+	.nav-link-current,
+	.nav-link-current:hover,
+	.nav-item:has(.collapse .nav-link-current) > .collapse-toggle {
+		color: var(--nav--link-hover--color);
+		background-color: var(--nav--link-hover--background-color);
+
+		> svg {
+			color: var(--nav--link--icon-hover--color);
+		}
+	}
+
+	/* Separator. */
+	.nav-separator {
+		margin: var(--nav--separator--margin) var(--nav--link--padding-h);
+		border-top: var(--nav--separator--border);
+	}
+}
+
+/* Collapse and Dropdown. */
+:where(.navigation .collapse, .navigation-dropdown) {
+	--nav--link--min-height: auto;
+	--nav--link--padding-v: var(--spacing-3);
+	--nav--link--padding-h: var(--spacing-6);
+	--nav--link--border-radius: var(--radius-2);
+
+	.nav-link {
+		line-height: 1.5;
+
+		> svg {
+			display: none;
+		}
+	}
+}
+
+/* Hide navigation when empty. */
+.navigation-hide {
+	display: none;
+}

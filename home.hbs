@@ -1,0 +1,143 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#contentFor "body-class"}} page-home{{/contentFor}}
+
+{{!-- Home hero (works from a page with the slug home-nero). --}}
+{{#> "settings/home-hero"}}
+	{{> "sections/home-hero" hide_subscription=true}}
+{{/"settings/home-hero"}}
+
+{{!-- Tags. --}}
+{{> "sections/tags" is_home="true"}}
+
+{{!--
+	Featured Carousel.
+--}}
+{{#match @custom.featured_section_style "Carousel"}}
+	{{#contentFor "featured-section-styles"}}
+		<link rel="stylesheet" type="text/css" href="{{asset "built/section-featured/carousel.css"}}">
+		<link rel="stylesheet" type="text/css" href="{{asset "vendors/swiper/effect-creative.min.css"}}">
+	{{/contentFor}}
+	{{#contentFor "featured-section-scripts"}}
+		<script src="{{asset "built/section-featured/carousel.js"}}"></script>
+	{{/contentFor}}
+
+	{{!-- Featured. --}}
+	{{#get "posts" limit=8 filter="featured:true" include="authors,tags,tiers"}}
+		{{> "sections/featured-carousel"}}
+	{{/get}}
+
+{{!--
+	Featured Slider.
+--}}
+{{else match @custom.featured_section_style "Slider"}}
+	{{#contentFor "featured-section-styles"}}
+		<link rel="stylesheet" type="text/css" href="{{asset "built/section-featured/slider.css"}}">
+	{{/contentFor}}
+	{{#contentFor "featured-section-scripts"}}
+		<script src="{{asset "built/section-featured/slider.js"}}"></script>
+	{{/contentFor}}
+
+	{{!-- Featured. --}}
+	{{#get "posts" limit=8 filter="featured:true" include="authors,tags,tiers"}}
+		{{> "sections/featured-slider"}}
+	{{/get}}
+
+{{!--
+	Featured Grid (some cards are hidden due to available space).
+--}}
+{{else match @custom.featured_section_style "Grid"}}
+	{{#contentFor "featured-section-styles"}}
+		<link rel="stylesheet" type="text/css" href="{{asset "built/section-featured/grid.css"}}">
+	{{/contentFor}}
+
+	{{!-- Featured. --}}
+	{{#get "posts" limit=7 filter="featured:true" include="authors,tags,tiers"}}
+		{{> "sections/featured-grid"}}
+	{{/get}}
+
+{{!--
+	Featured Grid List (some cards are hidden due to available space).
+--}}
+{{else match @custom.featured_section_style "Grid List"}}
+	{{#contentFor "featured-section-styles"}}
+		<link rel="stylesheet" type="text/css" href="{{asset "built/section-featured/grid-list.css"}}">
+	{{/contentFor}}
+
+	{{!-- Featured. --}}
+	{{#get "posts" limit=7 filter="featured:true" include="authors,tags,tiers"}}
+		{{> "sections/featured-grid-list"}}
+	{{/get}}
+{{/match}}
+
+{{!-- Posts. --}}
+{{#> get-posts}}
+	{{> "sections/posts" title=(t "Latest") is_home=true}}
+{{/get-posts}}
+
+{{!-- Authors. --}}
+{{#get "authors" limit=10 include="count.posts" order="count.posts DESC"}}
+	{{#if authors}}
+		<section class="section section-authors">
+			<div class="section-head">
+				<h2 class="section-title">{{t "Our Authors"}}</h2>
+			</div>
+
+			{{#match (t "/authors/") "!=" "false"}}
+			<a class="section-button button button-sm button-background-200" href="{{t "/authors/"}}">
+				<span class="label">{{t "All Authors"}}</span>
+				{{> "icons/arrow-narrow-right"}}
+			</a>
+			{{/match}}
+
+			{{#> "components/carousel-cards" cards=authors class="slider-cards-author"}}
+				{{> "components/card-author"}}
+			{{/"components/carousel-cards"}}
+		</section>
+	{{/if}}
+{{/get}}
+
+{{!-- Subscription. --}}
+{{> "sections/subscription"}}
+
+{{!-- Tags sections. --}}
+{{#> "get-tags" setting=@custom.tags_list_sections}}
+	{{#foreach tags}}
+		<section class="section section-tag">
+			<div class="section-head">
+				<h2 class="section-title"><a href="{{url}}">{{name}}</a><span class="title-tag-dot" {{#if accent_color}}style="color:{{accent_color}};"{{/if}}></span></h2>
+				{{#if description}}
+					<p>{{description}}</p>
+				{{/if}}
+			</div>
+
+			<a href="{{url}}" class="section-button button button-sm button-background-200">
+				<span class="label">{{t "View {tag}" tag=name}}</span>
+				{{> "icons/arrow-narrow-right"}}
+			</a>
+
+			{{#get "posts" limit=10 filter="tags:{{slug}}" include="authors,tags,tiers"}}
+				{{> "components/carousel-posts"}}
+			{{/get}}
+		</section>
+	{{/foreach}}
+{{/"get-tags"}}
+
+{{!-- Recommendations. --}}
+{{#match @site.recommendations_enabled}}
+	<section class="section section-recommendations">
+		<div class="section-head">
+			<h2>{{t "Recommendations"}}</h2>
+		</div>
+
+		{{#match (t "/recommendations/") "!=" "false"}}
+		<a class="button button-sm button-background-200 section-button" href="{{t "/recommendations/"}}">
+			<span class="label">{{t "All Recommendations"}}</span>
+			{{> "icons/arrow-narrow-right"}}
+		</a>
+		{{/match}}
+
+		{{recommendations limit=12}}
+	</section>
+{{/match}}

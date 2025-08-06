@@ -1,0 +1,115 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.popup {
+	display: flex;
+	backdrop-filter: blur(10px);
+	overflow: hidden;
+}
+
+/* Overlay. */
+.popup-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(10px);
+	background-color: var(--popup--overlay--background-color);
+	cursor: pointer;
+	opacity: 0.8;
+	border: 0;
+	z-index: -1;
+}
+
+/* Container */
+.popup-container {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	height: 100%;
+	max-width: 100%;
+	overflow: hidden auto;
+	background-color: var(--color-background);
+	transition: transform 0.6s cubic-bezier(0.2, 1, 0.2, 1);
+	transition-delay: 0.3s;
+}
+
+/* Head. */
+.popup-head {
+	position: sticky;
+	top: 0;
+	display: flex;
+	gap: var(--spacing-5);
+	align-items: center;
+	padding: 0 calc(var(--spacing-8) - var(--spacing-1));
+	min-height: var(--navbar--min-height);
+	backdrop-filter: blur(10px);
+	z-index: 3;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var(--color-background);
+		opacity: 0.9;
+		z-index: -1;
+	}
+
+	> h2 {
+		@mixin heading-6;
+	}
+}
+
+/* Body. */
+.popup-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-7);
+	padding: 0 var(--spacing-6) var(--spacing-8);
+}
+
+/* Navigation. */
+.popup-navigation {
+	.popup-container {
+		left: 0;
+		width: 320px;
+		width: calc(var(--sidebar--width) + var(--spacing-6));
+		transform: translateX(-40px);
+	}
+
+	.navigation-tags .nav-section-link > svg:first-child {
+		display: none;
+	}
+}
+
+/* Comments. */
+.popup-comments {
+	.popup-container {
+		right: 0;
+		width: 400px;
+		transform: translateX(40px);
+	}
+
+	.popup-close {
+		margin-left: auto;
+	}
+
+	.popup-body {
+		padding: 0 calc(var(--spacing-8) - var(--spacing-1));
+	}
+
+	/* Fix replay iframe. */
+	.post-comments > div > div > iframe {
+		position: absolute !important;
+	}
+}
+
+/* Show. */
+.popup-show > .popup-container {
+	transform: translateX(0);
+	transition-delay: 0s;
+}

@@ -1,0 +1,11 @@
+@define-mixin sidebar-collapsed {
+	:where([data-sidebar-collapsed='true']) {
+		@mixin-content;
+	}
+
+	@media (--breakpoint-max-xl) {
+		:where(html) {
+			@mixin-content;
+		}
+	}
+}

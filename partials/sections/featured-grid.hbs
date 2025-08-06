@@ -1,0 +1,131 @@
+{{!-- Card. --}}
+{{#*inline "card-featured"}}
+	<article class="card-post card-post-featured{{#if class}} {{class}}{{/if}}{{#if feature_image}} card-has-image{{/if}}{{#if has_slider}} card-has-slider{{/if}}{{#primary_author}} card-has-author{{/primary_author}}">
+		{{!-- Feature image. --}}
+		<a class="card-post-image" href="{{url}}" tabindex="-1">
+			{{#if feature_image}}
+				{{> "components/image" src=feature_image fast=image_fast alt=title}}
+			{{/if}}
+
+			<span class="card-post-image-badge">
+				{{#has tag="#video"}}
+					<span class="card-post-icon" data-tippy-content="{{t "Video Post"}}">
+						{{> "icons/video"}}
+					</span>
+				{{/has}}
+
+				{{#unless access}}
+					<span
+						class="card-post-icon"
+						data-tippy-content="{{#has visibility="paid"}}{{t "Paid Post"}}{{else has visibility="tiers"}}{{tiers}}{{else}}{{t "For Members"}}{{/has}}"
+					>
+						{{> "icons/lock"}}
+					</span>
+				{{/unless}}
+			</span>
+		</a>
+
+		<div class="card-post-content">
+			{{!-- Authors. --}}
+			{{#if authors}}
+			<div class="card-post-avatars">
+				{{#foreach authors limit=10}}
+					<div class="card-post-avatar">
+						<a href="{{url}}" class="card-post-avatar-image" aria-label="{{name}}" data-tooltip-custom="author">
+							{{> "components/avatar" size="large" src=profile_image}}
+						</a>
+						{{> "components/tooltip-author"}}
+					</div>
+				{{/foreach}}
+			</div>
+			{{/if}}
+
+			{{!-- Meta --}}
+			{{#if tags}}
+			<div class="card-post-meta">
+				{{#foreach tags limit=3}}
+					{{#unless @first}}
+						<span class="card-post-meta-divider">&bull;</span>
+					{{/unless}}
+
+					<a class="card-post-tag" href="{{url}}">{{name}}</a>
+				{{/foreach}}
+			</div>
+			{{/if}}
+
+			{{!-- Title. --}}
+			<h3 class="card-post-title"><a href="{{url}}">{{title}}</a></h3>
+
+			{{!-- Excerpt. --}}
+			{{#if custom_excerpt}}
+				<div class="card-post-excerpt">{{custom_excerpt}}</div>
+			{{else if excerpt}}
+				<div class="card-post-excerpt">{{excerpt}}</div>
+			{{/if}}
+
+			{{!-- Read more. --}}
+			<a href="{{url}}" class="card-post-button button">
+				<span class="screen-reader-text">{{title}}</span>
+				<span class="label">{{t "Read More"}}</span>
+				{{> "icons/arrow-narrow-right"}}
+			</a>
+		</div>
+	</article>
+{{/inline}}
+
+{{!-- Featured cards. --}}
+{{#*inline "featured-cards"}}
+	{{#foreach posts from=2 limit=limit}}
+		{{> "components/card-post" style="overlay-simple" featured=false}}
+	{{/foreach}}
+{{/inline}}
+
+{{!-- Non-featured cards. --}}
+{{#*inline "non-featured-cards"}}
+	{{#get "posts" limit=limit filter="featured:false"}}
+		{{#foreach posts}}
+			{{> "components/card-post" style="overlay-simple"}}
+		{{/foreach}}
+	{{/get}}
+{{/inline}}
+
+{{#*inline "get-cards"}}
+	{{#match posts.length 7}}
+		{{> @partial-block featured_limit=6 non_featured_limit=false}}
+	{{else match posts.length 6}}
+		{{> @partial-block featured_limit=5 non_featured_limit=1}}
+	{{else match posts.length 5}}
+		{{> @partial-block featured_limit=4 non_featured_limit=2}}
+	{{else match posts.length 4}}
+		{{> @partial-block featured_limit=3 non_featured_limit=3}}
+	{{else match posts.length 3}}
+		{{> @partial-block featured_limit=2 non_featured_limit=4}}
+	{{else match posts.length 2}}
+		{{> @partial-block featured_limit=1 non_featured_limit=5}}
+	{{else match posts.length 1}}
+		{{> @partial-block featured_limit=false non_featured_limit=6}}
+	{{/match}}
+{{/inline}}
+
+{{!-- Section. --}}
+{{#if posts}}
+	<section class="section section-featured section-featured-grid">
+		<h2 class="screen-reader-text">{{t "Featured Posts"}}</h2>
+
+		<div class="section-list">
+			{{!-- First featured. --}}
+			{{#foreach posts from=1 to=1}}
+				{{> "card-featured"}}
+			{{/foreach}}
+
+			{{#> "get-cards"}}
+				{{#if featured_limit}}
+					{{> "featured-cards" limit=featured_limit}}
+				{{/if}}
+				{{#if non_featured_limit}}
+					{{> "non-featured-cards" limit=non_featured_limit}}
+				{{/if}}
+			{{/"get-cards"}}
+		</div>
+	</section>
+{{/if}}

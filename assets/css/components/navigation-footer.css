@@ -1,0 +1,61 @@
+:where(.navigation-footer) {
+	--nav--gap: 0px;
+
+	/* Separator. */
+	--nav--separator--margin: 0px;
+	--nav--separator--border: none;
+
+	/* Without dropdown. */
+	> ul > li > .nav-link {
+		/* Link. */
+		--nav--link--min-height: auto;
+		--nav--link--padding-v: calc(var(--spacing-3) * 0.5);
+		--nav--link--padding-h: var(--spacing-4);
+		--nav--link--border-radius: var(--radius-1);
+		--nav--link--color: var(--color-foreground);
+		--nav--link-hover--background-color: transparent;
+	}
+
+	> ul {
+		flex-wrap: wrap;
+		margin: 0 calc(var(--spacing-4) * -1);
+	}
+
+	li {
+		flex: 0 0 auto;
+		max-width: 100%;
+	}
+
+	/* Separator. */
+	.nav-separator {
+		margin: 0;
+
+		&::before {
+			content: '/';
+			color: var(--color-mute);
+		}
+	}
+
+	/* Section. */
+	.nav-section {
+		display: none;
+	}
+
+	/* Dropdown. */
+	.dropdown {
+		top: auto;
+		bottom: 100%;
+		margin-top: 0;
+		margin-bottom: var(--dropdown--offset);
+
+		&::before {
+			top: auto;
+			bottom: calc(var(--dropdown--offset) * -1);
+		}
+	}
+
+	.dropdown-toggle {
+		margin-left: -6px;
+		margin-right: -6px;
+	}
+}

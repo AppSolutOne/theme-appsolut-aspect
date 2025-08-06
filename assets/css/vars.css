@@ -1,0 +1,151 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable function-no-unknown */
+
+/* Variables
+/* ---------------------------------------------------------- */
+
+:root {
+	/* Colors. */
+	--color-contrast: #000;
+	--color-background: #fff;
+	--color-background-100: #f3f3f3;
+	--color-background-200: #ededed;
+	--color-background-300: #dadada;
+	--color-border: rgb(128 128 128 / 20%);
+	--color-overlay: rgb(5 5 5 / 70%);
+	--color-foreground: #4d4d4d;
+	--color-secondary: #757575;
+	--color-mute: #b2b2b2;
+	--color-success: #348f3f;
+	--color-error: #c34d4d;
+	--color-white: #fff;
+	--color-black: #000;
+
+	/* Font. */
+	--font-family-headings: var(--gh-font-heading, 'Geist', sans-serif);
+	--font-family-body: var(--gh-font-body, 'Geist', sans-serif);
+	--font-family-button: var(--gh-font-body, 'Geist', sans-serif);
+	--font-x-small: 0.75rem; /* 12px */
+	--font-small: 0.875rem; /* 14px */
+	--font-large: 1.125rem; /* 18px */
+	--font-weight-light: 300;
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Spacings. */
+	--spacing-1: 0.125rem; /* 2px */
+	--spacing-2: 0.25rem; /* 4px */
+	--spacing-3: 0.375rem; /* 6px */
+	--spacing-4: 0.5rem; /* 8px */
+	--spacing-5: 0.625rem; /* 10px */
+	--spacing-6: 0.75rem; /* 12px */
+	--spacing-7: 1rem; /* 16px */
+	--spacing-8: 1.25rem; /* 20px */
+	--spacing-9: 1.875rem; /* 30px */
+	--spacing-10: 5rem; /* 80px */
+	--spacing-11: 6.25rem; /* 100px */
+	--vertical-rhythm: 1.5rem; /* 24px */
+
+	/* Border radius. */
+	--radius-1: 6px;
+	--radius-2: 8px;
+	--radius-3: 10px;
+	--radius-4: 14px;
+	--radius-5: 16px;
+	--radius-6: fluid(16px, 30px, 380px, 1500px);
+
+	/* Layout. */
+	--layout--padding: fluid(16px, 30px, 380px, 1500px);
+	--layout--gap: fluid(60px, 80px);
+
+	/* Navbar. */
+	--navbar--height: 58px;
+	--navbar--min-height: 58px;
+
+	/* Sidebar. */
+	--sidebar--width: calc(220px + var(--spacing-6) + var(--layout--padding));
+	--sidebar-collapsed--width: calc(
+		40px + var(--spacing-6) + var(--layout--padding)
+	);
+
+	/* Button. */
+	--button--padding-v: var(--spacing-4);
+	--button--padding-h: var(--spacing-8);
+	--button--min-height: 2.5rem; /* 40px */
+	--button--font-size: var(--font-small);
+	--button--font-weight: var(--font-weight-semibold);
+	--button--line-height: 1.5;
+	--button--border-radius: calc(var(--button--min-height) * 0.5);
+	--button--color: var(--color-accent-foreground);
+	--button--background-color: var(--ghost-accent-color);
+	--button--opacity: 1;
+	--button--transition:
+		clip-path 0.2s ease, background-color 0.15s ease, border-color 0.15s ease,
+		color 0.15s ease, opacity 0.15s ease;
+	--button-hover--color: var(--color-background);
+	--button-hover--background-color: var(--color-contrast);
+	--button-hover--opacity: 0.8;
+
+	/* Container. */
+	--container--width: 700px;
+	--container-wide--width: 1100px;
+
+	/* Featured image. */
+	--featured-image--max-width: 1300px;
+
+	/* Popup. */
+	--popup--overlay--background-color: #e8e8e8;
+
+	/* Avatar. */
+	--avatar--size: 2.25rem; /* 36px */
+	--avatar-large--size: 2.875rem; /* 46px */
+	--avatar-small--size: 1.375rem; /* 22px. */
+	--avatar--font-size: var(--font-small);
+	--avatar--color: var(--color-secondary);
+	--avatar--background-color: var(--color-background-100);
+	--avatar-hover--background-color: var(--color-background-200);
+
+	/* Dropdown. */
+	--dropdown--background-color: var(--color-background);
+	--dropdown--padding-v: var(--spacing-2);
+	--dropdown--padding-h: var(--spacing-2);
+	--dropdown--offset: var(--spacing-5);
+	--dropdown--border-radius: var(--radius-4);
+
+	/* Shadow. */
+	--shadow:
+		0 20px 60px -10px rgba(176 169 169 / 24%), 0 4px 20px -8px rgba(0 0 0 / 24%);
+
+	color-scheme: light;
+}
+
+/* prettier-ignore */
+@mixin color-scheme-dark :root {
+	& {
+		--ghost-accent-color: var(--color-dark-accent);
+		--color-accent-foreground: var(--color-dark-accent-foreground, #fff);
+		--color-contrast: #fff;
+		--color-background: #0f0f0f;
+		--color-background-100: #212121;
+		--color-background-200: #282828;
+		--color-background-300: #3F3F3F;
+		--color-foreground: #aaa;
+		--color-secondary: #808080;
+		--color-mute: #666;
+		--color-border: rgb(153 153 153 / 30%);
+
+		/* Popup. */
+		--popup--overlay--background-color: #212121;
+
+		/* Dropdown. */
+		--dropdown--background-color: #1A1A1A;
+
+		/* Shadow. */
+		--shadow: 0 20px 60px -10px rgba(0 0 0 / 70%),
+			0 4px 20px -8px rgba(0 0 0 / 70%);
+
+		color-scheme: dark;
+	}
+}

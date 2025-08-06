@@ -1,0 +1,14 @@
+.icon-loader path:last-child {
+	animation: aspect-icon-loader 0.5s infinite linear;
+	transform-origin: 50% 50%;
+}
+
+@keyframes aspect-icon-loader {
+	0% {
+		transform: rotate(0);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

@@ -1,0 +1,159 @@
+{{!--
+	Pricing component.
+
+	Available customization:
+		- pricing_start
+		- pricing_trial
+		- pricing_price
+		- pricing_description
+		- pricing_benefits
+		- pricing_button
+		- pricing_end
+		- pricing_render
+
+	Example usage with custom:
+		{{> pricing
+			pricing_trial='<div class="pricing-info">'
+			pricing_benefits="</div>"
+		}}
+--}}
+
+{{#get "tiers" include="monthly_price,yearly_price,benefits" filter="visibility:public" limit="all" as |tiers|}}
+	{{#if tiers}}
+		{{!-- Inputs (for toggle monthly and yearly) --}}
+		<input class="pricing-toggle-input pricing-toggle-input-monthly" value="monthly" name="pricing-toggle" type="radio" id="pricing-toggle-monthly"{{#match @site.portal_default_plan "monthly"}} checked{{/match}}>
+		<input class="pricing-toggle-input pricing-toggle-input-yearly" value="yearly" name="pricing-toggle" type="radio" id="pricing-toggle-yearly"{{#match @site.portal_default_plan "yearly"}} checked{{/match}}>
+
+		{{!-- Toggle. --}}
+		<div class="pricing-toggle">
+			{{#foreach @site.portal_plans}}
+				{{#match this 'monthly'}}
+					<label class="button pricing-toggle-monthly" for="pricing-toggle-monthly">{{t 'Monthly'}}</label>
+				{{/match}}
+				{{#match this 'yearly'}}
+					<label class="button pricing-toggle-yearly" for="pricing-toggle-yearly">{{t 'Yearly'}}</label>
+				{{/match}}
+			{{/foreach}}
+		</div>
+
+		<div class="pricing-container">
+			{{#foreach tiers}}
+				<div class="pricing">
+					{{#if ../../pricing_start}}{{{../../pricing_start}}}{{/if}}
+
+					{{!-- Name --}}
+					<h2 class="pricing-name">{{name}}</h2>
+
+					{{#if ../../pricing_trial}}{{{../../pricing_trial}}}{{/if}}
+
+					{{!-- Trial days. --}}
+					{{#if trial_days}}
+						<div class="pricing-trial">{{plural trial_days empty="" singular=(t "% day free") plural=(t "% days free")}}</div>
+					{{/if}}
+
+					{{#if ../../pricing_price}}{{{../../pricing_price}}}{{/if}}
+
+					{{!-- Free price. --}}
+					{{#match type "free"}}
+						<div class="pricing-price">
+							<span>{{t "$0"}}</span>
+						</div>
+					{{/match}}
+
+					{{!-- Monthly price. --}}
+					{{#if monthly_price}}
+					<div class="pricing-price pricing-price-monthly">
+						{{{t "{price} / month" price=(concat "<span>"(price monthly_price currency=currency)"</span>")}}}
+					</div>
+					{{/if}}
+
+					{{!-- Yearly price. --}}
+					{{#if yearly_price}}
+					<div class="pricing-price pricing-price-yearly">
+						{{{t "{price} / year" price=(concat "<span>"(price yearly_price currency=currency)"</span>")}}}
+					</div>
+					{{/if}}
+
+					{{#if ../../pricing_description}}{{{../../pricing_description}}}{{/if}}
+
+					{{!-- Description. --}}
+					{{#if description}}
+					<p class="pricing-description">
+						{{description}}
+					</p>
+					{{/if}}
+
+					{{#if ../../pricing_benefits}}{{{../../pricing_benefits}}}{{/if}}
+
+					{{!-- Benefits. --}}
+					{{#if benefits}}
+					<ul class="pricing-benefits">
+						{{#foreach benefits as |benefit|}}
+							<li>{{benefit}}</li>
+						{{/foreach}}
+					</ul>
+					{{/if}}
+
+					{{#if ../../pricing_button}}{{{../../pricing_button}}}{{/if}}
+
+					{{!-- Button. --}}
+					{{#match type 'free'}}
+						{{!-- Current plan. --}}
+						{{#if @member}}
+							<button class="button button-contrast pricing-button" disabled>
+								<span class="label">{{t 'Current plan'}}</span>
+							</button>
+
+						{{!-- Free. --}}
+						{{else}}
+							<a href="{{#match (t "/signup/") "!=" "false"}}{{t "/signup/"}}{{else}}#/portal/signup{{/match}}" class="button button-contrast button-grey pricing-button">
+								{{#if ../../pricing_button_free_label}}
+								<span class="label">{{../../pricing_button_free_label}}"></span>
+								{{else}}
+								<span class="label">{{t 'Sign up for free'}}</span>
+								{{/if}}
+							</a>
+						{{/if}}
+					{{else}}
+
+						{{!-- Paid. --}}
+						{{#if monthly_price}}
+							<a href="javascript:" data-portal="signup/{{id}}/monthly" class="button pricing-button{{#if yearly_price}} pricing-button-monthly{{/if}}">
+								{{#if ../../pricing_button_monthly_label}}
+								<span class="label">{{../../pricing_button_monthly_label}}</span>
+								{{else}}
+								<span class="label">{{{t "From {price}/month" price=(price monthly_price currency=currency)}}}</span>
+								{{/if}}
+							</a>
+						{{/if}}
+						{{#if yearly_price}}
+							<a href="javascript:" data-portal="signup/{{id}}/yearly" class="button pricing-button{{#if monthly_price}} pricing-button-yearly{{/if}}">
+								{{#if ../../pricing_button_yearly_label}}
+								<span class="label">{{../../pricing_button_yearly_label}}</span>
+								{{else}}
+								<span class="label">{{{t "From {price}/year" price=(price yearly_price currency=currency)}}}</span>
+								{{/if}}
+							</a>
+						{{/if}}
+					{{/match}}
+
+					{{!-- Discount. --}}
+					{{#if monthly_price}}
+						{{#if yearly_price}}
+							<div class="pricing-discount">{{{t '{count} discount' count=(concat '<span data-pricing-month="' monthly_price '" data-pricing-year="' yearly_price '"></span>')}}}</div>
+						{{/if}}
+					{{/if}}
+
+					{{#if ../../pricing_end}}{{{../../pricing_end}}}{{/if}}
+				</div>
+
+				{{#if ../../pricing_render}}{{{../../pricing_render}}}{{/if}}
+			{{/foreach}}
+		</div>
+	{{else}}
+		<div class="pricing-signin">
+			<p>{{t "This site is invite-only, contact the owner for access."}}</p>
+			<p>{{t "Already a member?"}} <a href="{{#match (t "/signin/") "!=" "false"}}{{t "/signin/"}}{{else}}#/portal/signin{{/match}}">{{t "Sign in"}}</a></p>
+		</div>
+	{{/if}}
+{{/get}}

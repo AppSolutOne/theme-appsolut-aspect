@@ -1,0 +1,116 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.section-subscription {
+	display: flex;
+	justify-content: space-between;
+	gap: var(--spacing-9);
+	padding: var(--spacing-9);
+	background-color: var(--color-background-100);
+	border-radius: var(--radius-6);
+
+	> div {
+		flex: 1 0 0%;
+		width: 100%;
+		max-width: 40%;
+
+		> p {
+			margin-top: var(--spacing-6);
+			margin-bottom: 0;
+		}
+	}
+
+	.form-subscribe {
+		flex: 1 0 0%;
+		align-self: flex-end;
+		max-width: 400px;
+
+		input {
+			background-color: var(--color-background);
+		}
+	}
+}
+
+.form-subscribe {
+	padding: 0;
+	margin: 0;
+	gap: var(--spacing-6);
+	border: 0;
+	border-radius: 0;
+	width: 400px;
+	max-width: 100%;
+
+	/* Fix for outline clipping. */
+	.post-sidebar & input {
+		outline-offset: -1px;
+	}
+
+	> div {
+		position: relative;
+		width: 100%;
+	}
+
+	input {
+		height: 3.125rem; /* 50px */
+		padding-right: 8rem;
+		border-radius: 2rem;
+		background-color: var(--color-background-200);
+	}
+
+	button {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		bottom: 5px;
+		width: auto;
+		margin-top: 0;
+		border-radius: 2rem;
+		padding: var(--spacing-3) var(--spacing-7);
+		z-index: 1;
+	}
+}
+
+.post-sidebar .form-subscribe > label {
+	font-size: var(--font-small);
+	font-weight: var(--font-weight-semibold);
+}
+
+@media (--breakpoint-max-md) {
+	.section-subscription {
+		flex-direction: column;
+
+		> div {
+			max-width: 400px;
+		}
+
+		.form-subscribe {
+			flex: 0 0 auto;
+			align-self: flex-start;
+			max-width: 100%;
+		}
+	}
+}
+
+@media (--breakpoint-max-xs) {
+	.section-subscription {
+		padding: var(--spacing-8);
+
+		h2 {
+			@mixin heading-5;
+		}
+	}
+
+	.form-subscribe {
+		width: 100%;
+
+		input {
+			height: auto;
+			padding-right: var(--spacing-8);
+		}
+
+		button {
+			position: static;
+			width: 100%;
+			margin-top: var(--spacing-4);
+		}
+	}
+}

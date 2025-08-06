@@ -1,0 +1,62 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.post-template-image {
+	.content {
+		padding-top: var(--spacing-8);
+	}
+
+	/* Header. */
+	.post-content-grid > .post-header {
+		order: -2;
+		margin-bottom: calc(var(--spacing-9) * 2);
+	}
+
+	.post-header + .post-upgrade-cta {
+		margin-top: 0;
+	}
+
+	/* Wrapper meta and buttons. */
+	.post-header-info {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		gap: var(--spacing-8) var(--spacing-9);
+		margin-top: var(--vertical-rhythm);
+	}
+
+	/* Tags. */
+	.post-tags {
+		margin-bottom: var(--vertical-rhythm);
+	}
+
+	/* Title. */
+	.post-title {
+		@mixin heading-2;
+	}
+
+	/* Excerpt. */
+	.post-excerpt {
+		margin-top: var(--spacing-6);
+	}
+
+	/* Has sidebar. */
+	&.post-has-sidebar {
+		.post-content-wrapper {
+			grid-row: 2;
+		}
+
+		.post-sidebar {
+			grid-row: span 2;
+		}
+	}
+
+	@media (--breakpoint-max-md) {
+		.content {
+			padding-top: var(--spacing-4);
+		}
+
+		.post-featured {
+			margin-bottom: calc(var(--layout--gap) * -1 + var(--spacing-9));
+		}
+	}
+}

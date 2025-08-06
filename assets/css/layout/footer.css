@@ -1,0 +1,24 @@
+.main > .footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: var(--spacing-6) var(--spacing-9);
+	margin-top: calc(var(--layout--padding) * -1 + var(--layout--gap));
+	padding: 0 var(--layout--padding) var(--layout--padding);
+
+	> .navigation {
+		flex: 0 0 auto;
+		max-width: 100%;
+	}
+
+	> .footer-copyright {
+		margin-right: auto;
+		font-size: var(--font-small);
+	}
+}
+
+@media (--breakpoint-xl) {
+	[data-sidebar-collapsed="false"] .main > .footer {
+		display: none;
+	}
+}

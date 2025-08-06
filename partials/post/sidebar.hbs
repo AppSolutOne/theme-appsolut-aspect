@@ -1,0 +1,14 @@
+<aside class="post-sidebar">
+	{{!-- Author card (hide on --breakpoint-max-lg). --}}
+	{{> "post/card-author"}}
+
+	<div class="post-sidebar-sticky toc-scroll">
+		{{!-- TOC. --}}
+		{{^has tag="#hide-toc"}}
+			{{> "post/toc"}}
+		{{/has}}
+
+		{{!-- Form subscribe (hide on --breakpoint-max-lg). --}}
+		{{> "form-subscribe" label="true"}}
+	</div>
+</aside>

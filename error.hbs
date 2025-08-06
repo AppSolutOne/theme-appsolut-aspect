@@ -1,0 +1,11 @@
+{{!< default-simple}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#contentFor "body-class"}}layout-error{{/contentFor}}
+
+<h1>{{statusCode}}</h1>
+<h2>{{message}}</h2>
+<a href="{{@site.url}}" class="button">
+	{{> "icons/arrow-narrow-left"}}
+	<span class="label">{{t "Back to Home"}}</span>
+</a>

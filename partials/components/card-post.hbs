@@ -1,0 +1,209 @@
+{{!-- Image. --}}
+{{#*inline "card-post-image"}}
+	<div class="card-post-image">
+		<a class="card-post-image-link" aria-label="{{title}}" href="{{url}}"></a>
+
+		{{#if feature_image}}
+			{{> "components/image" src=feature_image size="300" alt=title}}
+		{{/if}}
+
+		<span class="card-post-image-badge">
+			{{#if reading_time}}
+				<span class="card-post-time">{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+			{{/if}}
+
+			{{#if featured}}
+				<span class="card-post-icon" data-tippy-content="{{t "Featured Post"}}">
+					{{> "icons/flame"}}
+				</span>
+			{{/if}}
+
+			{{#has tag="#video"}}
+				<span class="card-post-icon" data-tippy-content="{{t "Video Post"}}">
+					{{> "icons/video"}}
+				</span>
+			{{/has}}
+
+			{{#unless access}}
+				<span
+					class="card-post-icon"
+					data-tippy-content="{{#has visibility="paid"}}{{t "Paid Post"}}{{else has visibility="tiers"}}{{tiers}}{{else}}{{t "For Members"}}{{/has}}"
+				>
+					{{> "icons/lock"}}
+				</span>
+			{{/unless}}
+		</span>
+	</div>
+{{/inline}}
+
+{{!-- Title. --}}
+{{#*inline "card-post-title"}}
+	<h3 class="card-post-title"><a href="{{url}}">{{title}}</a></h3>
+{{/inline}}
+
+{{!-- Primary tag. --}}
+{{#*inline "card-post-primary-tag"}}
+	{{#primary_tag}}
+		{{#if ../show_divider}}
+			<span class="card-post-meta-divider">&bull;</span>
+		{{/if}}
+		<a class="card-post-primary-tag" href="{{url}}">{{name}}</a>
+	{{/primary_tag}}
+{{/inline}}
+
+{{!-- Excerpt. --}}
+{{#*inline "card-post-excerpt"}}
+	{{#if excerpt}}
+		<p>{{excerpt}}</p>
+	{{else if custom_excerpt}}
+		<p>{{custom_excerpt}}</p>
+	{{/if}}
+{{/inline}}
+
+{{!-- Avatars. --}}
+{{#*inline "card-post-avatars"}}
+	{{#if authors}}
+		<div class="card-post-avatars">
+			{{#foreach authors limit=2}}
+				<div class="card-post-avatar">
+					<a href="{{url}}" class="card-post-author-image" data-tooltip-custom="author" tabindex="-1">
+						{{> "components/avatar" src=profile_image}}
+					</a>
+					{{> "components/tooltip-author"}}
+				</div>
+			{{/foreach}}
+		</div>
+	{{/if}}
+{{/inline}}
+
+{{!-- Primary author. --}}
+{{#*inline "card-post-primary-author"}}
+	{{#primary_author}}
+		<div class="card-post-author">
+			<a href="{{url}}" class="card-post-author-name" data-tooltip-custom="author">
+				{{name}}
+			</a>
+			{{> "components/tooltip-author"}}
+
+			{{#if ../show_button_more}}
+				{{#match ../authors.length ">" 1}}
+					<div class="card-post-authors-more">
+						<button aria-label="{{t "View all authors"}}" data-tooltip-custom="authors">+{{#foreach ../authors}}{{#if @last}}{{@index}}{{/if}}{{/foreach}}</button>
+						{{> "components/tooltip-authors" authors=../authors}}
+					</div>
+				{{/match}}
+			{{/if}}
+		</div>
+
+		{{#if ../show_divider}}
+			<span class="card-post-meta-divider">&bull;</span>
+		{{/if}}
+	{{/primary_author}}
+{{/inline}}
+
+{{!-- Date. --}}
+{{#*inline "card-post-date"}}
+	<time class="card-post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+{{/inline}}
+
+{{!-- Tags. --}}
+{{#*inline "card-post-tags"}}
+	{{#foreach tags from=from to=to}}
+		<span class="card-post-meta-divider">&bull;</span>
+		<a class="card-post-tag" href="{{url}}">{{name}}</a>
+	{{/foreach}}
+{{/inline}}
+
+{{!-- Card. --}}
+<article class="card card-post card-post-{{style}}{{class}}{{#if feature_image}} card-has-image{{/if}}{{#if authors}} card-has-author{{/if}}">
+	{{#match style "overlay"}}
+		{{> "card-post-image" reading_time=false}}
+	{{else match style "overlay-simple"}}
+		{{> "card-post-image" reading_time=false}}
+	{{else}}
+		{{> "card-post-image"}}
+	{{/match}}
+
+	<div class="card-post-content">
+		{{!-- Classic --}}
+		{{#match style "classic"}}
+			{{> "card-post-title"}}
+			{{> "card-post-avatars"}}
+			{{#if show_excerpt}}
+				{{> "card-post-excerpt"}}
+			{{/if}}
+			{{> "card-post-primary-author" show_button_more=true}}
+
+			{{!-- Meta. --}}
+			<div class="card-post-meta">
+				{{> "card-post-date"}}
+				{{> "card-post-tags" from=1 to=3}}
+			</div>
+
+		{{!-- Classic simple. --}}
+		{{else match style "classic-simple"}}
+			{{> "card-post-title"}}
+
+			<div class="card-post-meta">
+				{{> "card-post-primary-author" show_divider=true}}
+				{{> "card-post-date"}}
+				{{> "card-post-primary-tag" show_divider=true}}
+			</div>
+
+		{{!-- List. --}}
+		{{else match style "list"}}
+			{{#unless hide_primary_tag}}
+				{{> "card-post-primary-tag"}}
+			{{/unless}}
+			{{> "card-post-title"}}
+			{{> "card-post-excerpt"}}
+
+			<div class="card-post-meta-wrapper">
+				{{> "card-post-avatars"}}
+
+				<div class="card-post-meta">
+					{{> "card-post-primary-author"}}
+					{{> "card-post-date"}}
+					{{#if hide_primary_tag}}
+						{{> "card-post-tags" from=1 to=3}}
+					{{else}}
+						{{> "card-post-tags" from=2 to=4}}
+					{{/if}}
+				</div>
+			</div>
+
+		{{!-- List simple. --}}
+		{{else match style "list-simple"}}
+			{{> "card-post-title"}}
+
+			<div class="card-post-meta">
+				{{> "card-post-primary-author" show_divider=true}}
+				{{> "card-post-date"}}
+				{{> "card-post-tags" from=2 to=4}}
+			</div>
+
+			{{> "card-post-excerpt"}}
+
+		{{!-- Overlay. --}}
+		{{else match style "overlay"}}
+			{{> "card-post-avatars"}}
+			{{> "card-post-title"}}
+
+			<div class="card-post-meta">
+				{{> "card-post-primary-author" show_divider=true}}
+				{{> "card-post-date"}}
+				{{> "card-post-primary-tag" show_divider=true}}
+			</div>
+
+		{{!-- Overlay simple. --}}
+		{{else match style "overlay-simple"}}
+			{{> "card-post-title"}}
+
+			<div class="card-post-meta">
+				{{> "card-post-primary-author" show_divider=true}}
+				{{> "card-post-date"}}
+				{{> "card-post-primary-tag" show_divider=true}}
+			</div>
+		{{/match}}
+	</div>
+</article>

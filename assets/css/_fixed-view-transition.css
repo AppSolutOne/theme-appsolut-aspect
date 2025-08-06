@@ -1,0 +1,25 @@
+/* Fixed :view-transition. */
+.post-content {
+	/* Audio. */
+	.kg-audio-thumbnail {
+		clip-path: inset(0 round var(--radius-2));
+	}
+
+	/* Bookmark. */
+	.kg-bookmark-thumbnail {
+		clip-path: inset(0 round var(--radius-2));
+	}
+
+	/* Video. */
+	.kg-video-card video,
+	.kg-video-overlay,
+	.kg-video-player-container {
+		clip-path: inset(0 round var(--radius-4));
+	}
+
+	/* Embed. */
+	.kg-embed-card > iframe {
+		clip-path: inset(0 round var(--radius-4));
+		border-radius: 0;
+	}
+}

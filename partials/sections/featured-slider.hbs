@@ -1,0 +1,119 @@
+{{!-- Card. --}}
+{{#*inline "card-featured"}}
+	<div class="card-post card-post-featured{{#if class}} {{class}}{{/if}}{{#if feature_image}} card-has-image{{/if}}{{#if has_slider}} card-has-slider{{/if}}{{#primary_author}} card-has-author{{/primary_author}}">
+		{{!-- Feature image. --}}
+		<a class="card-post-image" href="{{url}}" tabindex="-1">
+			{{#if feature_image}}
+				<div class="card-post-image-parallax" data-swiper-parallax-x="20%">
+					{{> "components/image" src=feature_image fast=image_fast alt=title}}
+				</div>
+			{{/if}}
+
+			{{#unless access}}
+			<span class="card-post-image-badge">
+				<span
+					class="card-post-icon"
+					data-tippy-content="{{#has visibility="paid"}}{{t "Paid Post"}}{{else has visibility="tiers"}}{{tiers}}{{else}}{{t "For Members"}}{{/has}}"
+				>
+					{{> "icons/lock"}}
+				</span>
+			</span>
+			{{/unless}}
+		</a>
+
+		<div class="card-post-content">
+			{{!-- Tags. --}}
+			{{#if tags}}
+				<div class="card-post-tags" data-swiper-parallax-x="-35%" data-swiper-parallax-opacity="0">
+					{{#foreach tags limit=3}}
+						{{#unless @first}}
+							<span class="card-post-meta-divider">&bull;</span>
+						{{/unless}}
+
+						<a class="card-post-tag" href="{{url}}">{{name}}</a>
+					{{/foreach}}
+				</div>
+			{{/if}}
+
+			{{!-- Title. --}}
+			<h3 class="card-post-title" data-swiper-parallax-x="-30%" data-swiper-parallax-opacity="0">
+				<a href="{{url}}">{{title}}</a>
+			</h3>
+
+			{{!-- Excerpt. --}}
+			{{#if custom_excerpt}}
+				<div class="card-post-excerpt" data-swiper-parallax-x="-20%" data-swiper-parallax-opacity="0">{{custom_excerpt}}</div>
+			{{else if excerpt}}
+				<div class="card-post-excerpt" data-swiper-parallax-x="-20%" data-swiper-parallax-opacity="0">{{excerpt}}</div>
+			{{/if}}
+		</div>
+
+		{{!-- Meta --}}
+		<div class="card-post-meta">
+			{{!-- Avatars. --}}
+			{{#if authors}}
+			<div class="card-post-avatars">
+				{{#foreach authors limit=4 order="published_at desc"}}
+					<div class="card-post-avatar">
+						<a href="{{url}}" class="card-post-avatar-image" aria-label="{{name}}" data-tooltip-custom="author">
+							{{> "components/avatar" src=profile_image}}
+						</a>
+						{{> "components/tooltip-author"}}
+					</div>
+				{{/foreach}}
+			</div>
+			{{/if}}
+
+			{{#primary_author}}
+				<div class="card-post-author">
+					<a data-tooltip-custom="author" href="{{url}}">{{name}}</a>
+					{{> "components/tooltip-author"}}
+				</div>
+				{{#match ../authors.length ">" 3}}
+					<div class="card-post-authors-more">
+						<button aria-label="{{t "View all authors"}}" data-tooltip-custom="authors">+{{#foreach ../authors}}{{#if @last}}{{@index}}{{/if}}{{/foreach}}</button>
+						{{> "components/tooltip-authors" authors=../authors}}
+					</div>
+				{{/match}}
+				<span class="card-post-meta-divider">&bull;</span>
+			{{/primary_author}}
+
+			<span><time class="card-post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time></span>
+
+			{{#if reading_time}}
+				<span class="card-post-meta-divider">&bull;</span>
+				<span class="card-post-time">{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+			{{/if}}
+		</div>
+	</div>
+{{/inline}}
+
+{{!-- Section. --}}
+{{#if posts}}
+	<section class="section section-featured">
+		<h2 class="screen-reader-text">{{t "Featured Posts"}}</h2>
+
+		{{!-- Carousel. --}}
+		{{#match posts.length ">" 1}}
+			<div class="swiper swiper-horizontal">
+				<div class="swiper-wrapper">
+					{{#foreach posts}}
+					<div class="swiper-slide{{#if @first}} swiper-slide-active{{/if}}">
+						{{> "card-featured" image_fast=@first has_carousel=true}}
+					</div>
+					{{/foreach}}
+				</div>
+			</div>
+
+			{{!-- Navigation buttons swiper. --}}
+			<div class="slider-button slider-button-prev">{{> "icons/arrow-left"}}</div>
+			<div class="slider-button slider-button-next">{{> "icons/arrow-right"}}</div>
+
+		{{!-- Simple card. --}}
+		{{else}}
+			{{#foreach posts}}
+				{{> "card-featured" image_fast="true"}}
+			{{/foreach}}
+		{{/match}}
+	</section>
+{{/if}}

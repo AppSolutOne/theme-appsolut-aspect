@@ -1,0 +1,83 @@
+.section-recommendations {
+	&,
+	> .section-button {
+		display: none;
+	}
+
+	&:has(> .recommendations-list),
+	&:has(> .recommendations-list > :nth-child(12)) > .section-button {
+		display: flex;
+	}
+}
+
+.recommendations-list {
+	--grid--columns: 1;
+
+	display: grid;
+	grid-template-columns: repeat(var(--grid--columns), minmax(0, 1fr));
+	gap: var(--layout--padding);
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	.card-recommendation {
+		height: 100%;
+	}
+}
+
+/* 2 columns. */
+@media (--breakpoint-xs) {
+	.recommendations-list {
+		--grid--columns: 2;
+	}
+}
+
+/* 3 columns. */
+@media (--breakpoint-md) {
+	.recommendations-list {
+		--grid--columns: 3;
+	}
+}
+
+/* 4 columns. */
+@media (--breakpoint-lg) {
+	.recommendations-list {
+		--grid--columns: 4;
+	}
+}
+
+@media (--breakpoint-xl) {
+	[data-sidebar-collapsed='true'] .recommendations-list {
+		--grid--columns: 5;
+	}
+}
+
+@media (--breakpoint-huge) {
+	.recommendations-list {
+		--grid--columns: 5;
+	}
+
+	[data-sidebar-collapsed='true'] .recommendations-list {
+		--grid--columns: 6;
+	}
+}
+
+/* 5 columns. */
+@media (--breakpoint-gigantic) {
+	.recommendations-list {
+		--grid--columns: 6;
+	}
+
+	[data-sidebar-collapsed='true'] .recommendations-list {
+		--grid--columns: 7;
+	}
+}
+
+/* 6 columns. */
+@media (--breakpoint-colossal) {
+	.recommendations-list,
+	[data-sidebar-collapsed='true'] .recommendations-list {
+		--grid--columns: 7;
+	}
+}

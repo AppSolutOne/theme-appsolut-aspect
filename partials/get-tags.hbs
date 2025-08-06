@@ -1,0 +1,60 @@
+{{!--
+	Get tags with order and filter.
+	default order popular tags ("count.posts DESC").
+
+	Variants:
+		1. "-1" - all
+		2. "asc:-1" or "desc:-1" - order all
+		3. "asc:123" or "desc:123" - order count
+		4. "3" - count
+		5. "tag1,tag2,tag3" - specific
+--}}
+
+{{#if setting}}
+	{{!-- All popular tags. --}}
+	{{#match setting "-1"}}
+		{{#get "tags" limit="all" filter="visibility:public" include="count.posts" order="count.posts DESC"}}
+			{{> @partial-block }}
+		{{/get}}
+
+	{{!-- Order ASC. --}}
+	{{else match (concat setting.[0] setting.[1] setting.[2] setting.[3]) "asc:"}}
+		{{!-- all. --}}
+		{{#match (concat setting.[3] setting.[4] setting.[5]) ":-1"}}
+			{{#get "tags" limit="all" filter="visibility:public" include="count.posts" order="name ASC"}}
+				{{> @partial-block }}
+			{{/get}}
+		{{!-- count. --}}
+		{{else}}
+			{{#get "tags" limit=(concat setting.[4] setting.[5] setting.[6]) filter="visibility:public" include="count.posts" order="name ASC"}}
+				{{> @partial-block }}
+			{{/get}}
+		{{/match}}
+
+	{{!-- Order DESC. --}}
+	{{else match (concat setting.[0] setting.[1] setting.[2] setting.[3] setting.[4]) "desc:"}}
+		{{!-- all. --}}
+		{{#match (concat setting.[4] setting.[5] setting.[6]) ":-1"}}
+			{{#get "tags" limit="all" filter="visibility:public" include="count.posts" order="name DESC"}}
+				{{> @partial-block }}
+			{{/get}}
+		{{!-- count. --}}
+		{{else}}
+			{{#get "tags" limit=(concat setting.[5] setting.[6] setting.[7]) filter="visibility:public" include="count.posts" order="name DESC"}}
+				{{> @partial-block }}
+			{{/get}}
+		{{/match}}
+
+	{{!-- Count of popular tags. --}}
+	{{else match setting ">" 0}}
+		{{#get "tags" limit=setting filter="visibility:public" include="count.posts" order="count.posts DESC"}}
+			{{> @partial-block }}
+		{{/get}}
+
+	{{!-- Select specific tags. --}}
+	{{else}}
+		{{#get "tags" limit="all" filter="slug:[{{setting}}]" include="count.posts"}}
+			{{> @partial-block }}
+		{{/get}}
+	{{/match}}
+{{/if}}

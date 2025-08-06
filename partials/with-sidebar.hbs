@@ -1,0 +1,6 @@
+{{#is "post"}}
+	{{~#if @custom.show_sidebar}}{{^has tag="#hide-sidebar"}}{{> @partial-block}}{{/has}}{{else}}
+	{{~#has tag="#sidebar"}}{{> @partial-block}}{{/has}}{{/if}}
+{{~else}}
+	{{~#has tag="#sidebar"}}{{> @partial-block}}{{/has}}
+{{~/is}}

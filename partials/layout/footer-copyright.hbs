@@ -1,0 +1,5 @@
+{{#if @custom.footer_copyright}}
+<div class="footer-copyright">{{{@custom.footer_copyright}}}</div>
+{{else}}
+<div class="footer-copyright">{{{t '&copy; {date} {siteTitle}<span> - Published with {ghostLink} & {themeLink}</span>' date=(date format="YYYY") siteTitle=@site.title ghostLink="<a href='https://ghost.org/' target='_blank' rel='noopener'>Ghost</a>" themeLink="<a href='https://www.priority.vision/themes/aspect/' target='_blank' rel='noopener'>Aspect</a>" }}}</div>
+{{/if}}

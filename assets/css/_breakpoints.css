@@ -1,0 +1,21 @@
+/* Max. */
+@custom-media --breakpoint-max-colossal (max-width: 2229px);
+@custom-media --breakpoint-max-gigantic (max-width: 1899px);
+@custom-media --breakpoint-max-huge (max-width: 1574px);
+@custom-media --breakpoint-max-2xl (max-width: 1399px);
+@custom-media --breakpoint-max-xl (max-width: 1199px);
+@custom-media --breakpoint-max-lg (max-width: 991px);
+@custom-media --breakpoint-max-md (max-width: 767px);
+@custom-media --breakpoint-max-sm (max-width: 539px);
+@custom-media --breakpoint-max-xs (max-width: 439px);
+
+/* Min. */
+@custom-media --breakpoint-colossal (min-width: 2230px);
+@custom-media --breakpoint-gigantic (min-width: 1900px);
+@custom-media --breakpoint-huge (min-width: 1575px);
+@custom-media --breakpoint-2xl (min-width: 1400px);
+@custom-media --breakpoint-xl (min-width: 1200px);
+@custom-media --breakpoint-lg (min-width: 992px);
+@custom-media --breakpoint-md (min-width: 768px);
+@custom-media --breakpoint-sm (min-width: 540px);
+@custom-media --breakpoint-xs (min-width: 440px);

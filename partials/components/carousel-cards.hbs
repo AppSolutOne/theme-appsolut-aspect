@@ -1,0 +1,16 @@
+<div class="swiper slider-cards {{class}}">
+	<div class="swiper-wrapper">
+		{{#foreach cards}}
+		<div class="swiper-slide">
+			{{> @partial-block}}
+		</div>
+		{{/foreach}}
+	</div>
+
+	<div class="slider-button-wrapper slider-button-wrapper-prev">
+		<div class="slider-button slider-button-prev swiper-button-disabled">{{> "icons/arrow-left"}}</div>
+	</div>
+	<div class="slider-button-wrapper slider-button-wrapper-next">
+		<div class="slider-button slider-button-next">{{> "icons/arrow-right"}}</div>
+	</div>
+</div>

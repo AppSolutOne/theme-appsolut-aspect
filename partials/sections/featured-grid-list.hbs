@@ -1,0 +1,56 @@
+{{!-- Featured cards. --}}
+{{#*inline "featured-cards"}}
+	{{#foreach posts from=2 limit=limit}}
+		{{> "components/card-post" style="list" hide_primary_tag=true featured=false}}
+	{{/foreach}}
+{{/inline}}
+
+{{!-- Non-featured cards. --}}
+{{#*inline "non-featured-cards"}}
+	{{#get "posts" limit=limit filter="featured:false"}}
+		{{#foreach posts}}
+			{{> "components/card-post" style="list" hide_primary_tag=true}}
+		{{/foreach}}
+	{{/get}}
+{{/inline}}
+
+{{#*inline "get-cards"}}
+	{{#match posts.length 7}}
+		{{> @partial-block featured_limit=6 non_featured_limit=false}}
+	{{else match posts.length 6}}
+		{{> @partial-block featured_limit=5 non_featured_limit=1}}
+	{{else match posts.length 5}}
+		{{> @partial-block featured_limit=4 non_featured_limit=2}}
+	{{else match posts.length 4}}
+		{{> @partial-block featured_limit=3 non_featured_limit=3}}
+	{{else match posts.length 3}}
+		{{> @partial-block featured_limit=2 non_featured_limit=4}}
+	{{else match posts.length 2}}
+		{{> @partial-block featured_limit=1 non_featured_limit=5}}
+	{{else match posts.length 1}}
+		{{> @partial-block featured_limit=false non_featured_limit=6}}
+	{{/match}}
+{{/inline}}
+
+{{!-- Section. --}}
+{{#if posts}}
+	<section class="section section-featured section-featured-grid-list">
+		<h2 class="screen-reader-text">{{t "Featured Posts"}}</h2>
+
+		<div class="section-list">
+			{{!-- First featured. --}}
+			{{#foreach posts from=1 to=1}}
+				{{> "components/card-post" style="classic" class=" card-post-featured" show_excerpt=true}}
+			{{/foreach}}
+
+			{{#> "get-cards"}}
+				{{#if featured_limit}}
+					{{> "featured-cards" limit=featured_limit}}
+				{{/if}}
+				{{#if non_featured_limit}}
+					{{> "non-featured-cards" limit=non_featured_limit}}
+				{{/if}}
+			{{/"get-cards"}}
+		</div>
+	</section>
+{{/if}}

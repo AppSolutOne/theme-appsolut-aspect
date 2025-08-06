@@ -1,0 +1,8 @@
+<div class="tooltip-custom tooltip-custom-authors" style="display:none;">
+	{{#foreach authors}}{{#unless @first}}
+		<a href="{{url}}" class="tooltip-author">
+			{{> "components/avatar" src=profile_image}}
+			{{name}}
+		</a>
+	{{/unless}}{{/foreach}}
+</div>

@@ -1,0 +1,74 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.section {
+	position: relative;
+	z-index: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-8);
+}
+
+.section-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--spacing-7);
+	width: 100%;
+	max-width: var(--container--width);
+	margin-bottom: var(--spacing-5);
+	flex: 1 0 0%;
+}
+
+.section-button {
+	margin-bottom: var(--spacing-5);
+	margin-left: auto;
+	align-self: flex-end;
+}
+
+.section-title > a {
+	text-decoration: none;
+}
+
+/* Tag dot. */
+.section-title > span {
+	display: inline;
+	margin-left: var(--spacing-5);
+	color: var(--color-mute);
+
+	&::before {
+		content: '';
+		display: inline-block;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background-color: currentcolor;
+		vertical-align: 0.15em;
+	}
+}
+
+/* Title author. */
+.section-title-author {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-6);
+
+	> a {
+		flex: 0 0 auto;
+	}
+}
+
+@media (--breakpoint-max-sm) {
+	.section-head {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+	.section-button {
+		width: 100%;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.section-title-author .avatar {
+		--avatar-large--size: var(--avatar--size);
+	}
+}

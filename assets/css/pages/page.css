@@ -1,0 +1,5 @@
+.page-template {
+	.post-featured:empty + .post-content-grid {
+		margin-top: var(--spacing-9);
+	}
+}

@@ -1,0 +1,11 @@
+{{#if tags}}
+<nav class="post-tags{{#if class}} {{class}}{{/if}}" aria-label="{{t "Post Tags Navigation"}}">
+	<ul>
+		{{#foreach tags}}
+			<li>
+				<a class="post-tag" href="{{url}}">{{name}}</a>
+			</li>
+		{{/foreach}}
+	</ul>
+</nav>
+{{/if}}

@@ -1,0 +1,71 @@
+{{!-- Srcset. --}}
+{{#*inline "srcset"}}
+	{{!--  Mini avatar. --}}
+	{{~#match size "36"~}}
+		{{img_url src size="36" format=format}} 36w,
+		{{img_url src size="72" format=format}} 72w
+	{{!-- Avatar. --}}
+	{{~else match size "50"~}}
+		{{img_url src size="46" format=format}} 46w,
+		{{img_url src size="92" format=format}} 92w
+	{{!-- Author card. --}}
+	{{~else match size "200"~}}
+		{{img_url src size="200" format=format}} 200w,
+		{{img_url src size="300" format=format}} 300w,
+		{{img_url src size="400" format=format}} 400w
+	{{!-- Post card. --}}
+	{{~else match size "300"~}}
+		{{img_url src size="300" format=format}} 300w,
+		{{img_url src size="400" format=format}} 400w,
+		{{img_url src size="600" format=format}} 600w
+	{{!-- Hero. --}}
+	{{~else match size "600"~}}
+		{{img_url src size="300" format=format}} 300w,
+		{{img_url src size="400" format=format}} 400w,
+		{{img_url src size="600" format=format}} 600w,
+		{{img_url src size="1200" format=format}} 1200w,
+		{{img_url src size="1600" format=format}} 1600w,
+	{{!-- Card post featured. --}}
+	{{~else~}}
+		{{img_url src size="300" format=format}} 300w,
+		{{img_url src size="400" format=format}} 400w,
+		{{img_url src size="600" format=format}} 600w,
+		{{img_url src size="1200" format=format}} 1200w,
+		{{img_url src size="1600" format=format}} 1600w,
+		{{img_url src size="2000" format=format}} 2000w
+	{{~/match~}}
+{{/inline}}
+
+{{!-- Sizes. --}}
+{{#*inline "sizes"}}
+	{{~#match size "36"~}}
+		36px
+	{{~else match size "50"~}}
+		50px
+	{{~else match size "200"~}}
+		(max-width: 439.98px) 94vw, (max-width: 539.98px) 45vw, (max-width: 991.98px) 20vw, 14vw
+	{{~else match size "300"~}}
+		(max-width: 539.98px) 94vw, (max-width: 991.98px) 43vw, (max-width: 1574.98px) 25vw, 21vw
+	{{~else match size "600"~}}
+		(max-width: 991.98px) 90vw, 45vw
+	{{~else~}}
+		(max-width: 991.98px) 90vw, 40vw
+	{{~/match~}}
+{{/inline}}
+
+<picture{{#if class}} class="{{class}}"{{/if}}>
+	<source
+		srcset="{{> "srcset" format="webp"}}"
+		sizes="{{> "sizes"}}"
+		type="image/webp"
+	>
+	<img
+		src="{{img_url src size}}"
+		srcset="{{> "srcset"}}"
+		width="{{#match size "36"}}36{{else match size "50"}}50{{else match size "200"}}210{{else match size "300"}}370{{else match size "600"}}670{{else}}1340{{/match}}"
+		height="{{#match size "36"}}36{{else match size "50"}}50{{else match size "200"}}280{{else match size "300"}}210{{else match size "600"}}370{{else}}530{{/match}}"
+		alt="{{#if alt}}{{alt}}{{else}}{{altElse}}{{/if}}"
+		sizes="{{> "sizes"}}"
+		loading="{{#match fast "true"}}eager{{else match fast true}}eager{{else}}lazy{{/match}}"
+	>
+</picture>

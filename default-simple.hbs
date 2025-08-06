@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html
+	lang="{{@site.locale}}"
+	data-color-scheme="
+		{{~#match @custom.color_scheme "Dark"~}}
+			dark
+		{{~else match @custom.color_scheme "Light"~}}
+			light
+		{{~else~}}
+			system
+		{{~/match~}}
+	"
+>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{{!-- Basic meta - advanced meta is output with {{ghost_head}} below --}}
+	<title>{{meta_title page=(t " (Page %)")}}</title>
+
+	{{!-- Script for theme data --}}
+	{{> "theme-head-script"}}
+
+	{{!-- Script for color scheme --}}
+	{{#if @custom.display_color_scheme_toggle}}
+	{{> "color-scheme-head-script"}}
+	{{/if}}
+
+	{{!-- Preload scripts --}}
+	<link rel="preload" as="style" href="{{asset "built/index.css"}}">
+
+	{{!-- Preload font. --}}
+	<link rel="preload" href="{{asset "vendors/Geist-Variable.woff2"}}" as="font" type="font/woff2" crossorigin/>
+
+	{{!-- Preload main styles and scripts for better performance --}}
+	<style>
+		@font-face {
+			font-family: 'Geist';
+			font-display: swap;
+			src: url({{asset "vendors/Geist-Variable.woff2"}}) format("woff2-variations");
+			font-weight: 100 900;
+		}
+
+		:root {
+			{{#if @custom.dark_mode_accent_color}}--color-dark-accent: {{@custom.dark_mode_accent_color}};{{/if}}
+			{{#if @custom.foreground_accent_color}}--color-accent-foreground: {{@custom.foreground_accent_color}};{{/if}}
+			{{#if @custom.dark_mode_foreground_accent_color}}--color-dark-accent-foreground: {{@custom.dark_mode_foreground_accent_color}};{{/if}}
+		}
+	</style>
+
+	{{!-- Theme styles. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "built/index.css"}}">
+
+	{{!-- Ivent. --}}
+	<script src="{{asset "assets/vendors/ivent.min.js"}}"></script>
+
+	{{!-- Custom. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "custom.css"}}">
+
+	{{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings, it should always be the last tag before the closing head tag --}}
+	{{ghost_head}}
+</head>
+
+<body class="{{block "body-class"}}">
+	<main class="main">
+		{{!-- Content. --}}
+		<article id="content" class="content">
+			{{{body}}}
+		</article>
+	</main>
+
+	{{!-- Announcement bar. --}}
+	<script src="{{asset "built/announcement-bar.js"}}"></script>
+
+	{{!-- Custom. --}}
+	<script src="{{asset "custom.js"}}"></script>
+
+	{{!-- Ghost outputs required functional scripts with this tag, it should always be the last thing before the closing body tag --}}
+	{{ghost_foot}}
+</body>
+</html>

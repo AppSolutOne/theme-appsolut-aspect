@@ -1,0 +1,67 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#post}}
+{{!-- Everything inside the #post block pulls data from the page --}}
+
+{{#contentFor "body-class"}} post-template-image{{#> "with-sidebar"}} post-has-sidebar{{/"with-sidebar"}}{{#unless access}} post-locked{{/unless}}{{/contentFor}}
+
+{{> "post/feature-image"}}
+
+{{#if html}}
+	<div class="post-content-grid">
+{{/if}}
+
+	<header class="post-header container">
+		{{!-- Tags. --}}
+		{{> "post/tags"}}
+
+		{{!-- Title. --}}
+		<h1 class="post-title">{{title}}</h1>
+
+		{{!-- Excerpt. --}}
+		{{#if custom_excerpt}}
+			<p class="post-excerpt">{{custom_excerpt}}</p>
+		{{/if}}
+
+		{{!-- Meta. --}}
+		<div class="post-header-info">
+			<ul class="post-meta">
+				{{#if authors}}
+					{{> "post/meta-author"}}
+				{{/if}}
+				<li>
+					<time class="post-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+				</li>
+				{{#if reading_time}}
+				<li class="separator">&bull;</li>
+				<li>
+					<span class="post-meta-time">{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+				</li>
+				{{/if}}
+			</ul>
+
+			<div class="post-header-buttons">
+				{{> "post/button-comments"}}
+				{{> "post/button-share"}}
+			</div>
+		</div>
+	</header>
+
+	{{!-- Content. --}}
+	{{> "post/content" hide_tags=true hide_wrapper=true}}
+
+{{#if html}}
+</div>
+{{/if}}
+
+{{!-- Read next. --}}
+{{> "post/read-next"}}
+
+{{!-- Subscription (show on --breakpoint-max-lg) --}}
+{{> "sections/subscription"}}
+
+{{!-- Comments. --}}
+{{> "post/comments"}}
+
+{{/post}}

@@ -1,0 +1,56 @@
+{{!< default-simple}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#> "layout/split"}}
+
+	{{!-- Everything inside the #page block pulls data from the page. --}}
+	{{#page}}
+
+		{{!-- Hero. --}}
+		<h1>{{title}}</h1>
+		{{#if custom_excerpt}}
+			<p>{{custom_excerpt}}</p>
+		{{/if}}
+
+	{{!-- Hero default. --}}
+	{{else}}
+		<h1>{{t "Sign up"}}</h1>
+
+		{{!-- Invite only. --}}
+		{{#if @site.members_invite_only}}
+			<p>{{t "New registrations are temporarily closed. If you already have an account, please sign in to access your reading space."}}</p>
+
+		{{!-- Access. --}}
+		{{else if @site.members_enabled}}
+			<p>{{t "Unlock full access and see the entire library of members-only content & updates."}}</p>
+
+		{{!-- Nobody. --}}
+		{{else}}
+			<p>{{t "Our blog's authentication system is currently under maintenance. In the meantime, you can still enjoy our public articles."}}</p>
+		{{/if}}
+	{{/page}}
+
+	{{!-- Form. --}}
+	{{#if @site.members_enabled}}
+		{{^if @site.members_invite_only}}
+			<form data-members-form="signup">
+				<input data-members-name placeholder="{{t 'Your name'}}" type="text" id="name" />
+				<input data-members-email placeholder="{{t 'Your email'}}" type="email" id="email" required />
+
+				<span class="form-alert">
+					<span data-members-error class="error"></span>
+					<span class="success">{{t "Success! Check your inbox for our email."}}</span>
+				</span>
+
+				<button type="submit">
+					<span class="label hide-when-loading">{{t 'Sign up'}}</span>
+					<span class="label loading">{{t 'Sending'}}{{> "icons/loader"}}</span>
+				</button>
+			</form>
+
+			<p>{{t "Already a member?"}} <a href="{{#match (t "/signin/") "!=" "false"}}{{t "/signin/"}}{{else}}#/portal/signin{{/match}}">{{t "Sign in"}}</a></p>
+		{{else}}
+			<p>{{t "Already a member?"}} <a href="{{#match (t "/signin/") "!=" "false"}}{{t "/signin/"}}{{else}}#/portal/signin{{/match}}">{{t "Sign in"}}</a></p>
+		{{/if}}
+	{{/if}}
+{{/"layout/split"}}

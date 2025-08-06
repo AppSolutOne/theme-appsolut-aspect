@@ -1,0 +1,15 @@
+{{#primary_author}}
+<div class="post-card-author">
+	<a href="{{url}}" class="post-card-author-image" aria-label="{{name}}" tabindex="-1">
+		{{> "components/avatar" size="large" src=profile_image}}
+	</a>
+
+	<a href="{{url}}" class="post-card-author-name">{{name}}</a>
+
+	{{#if bio}}
+		<div class="post-card-author-bio">{{bio}}</div>
+	{{/if}}
+
+	{{> "components/social-links-author" hide_label=true}}
+</div>
+{{/primary_author}}

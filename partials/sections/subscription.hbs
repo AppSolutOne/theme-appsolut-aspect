@@ -1,0 +1,14 @@
+{{#if @site.members_enabled}}
+	{{#unless @member}}
+		{{#if @custom.subscription_form_title}}
+			<section class="section section-subscription">
+				<div>
+					<h2>{{@custom.subscription_form_title}}</h2>
+					{{#if @custom.subscription_form_description}}<p>{{@custom.subscription_form_description}}</p>{{/if}}
+				</div>
+
+				{{> "form-subscribe" email_id="section-subscription-email"}}
+			</section>
+		{{/if}}
+	{{/unless}}
+{{/if}}

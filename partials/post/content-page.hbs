@@ -1,0 +1,69 @@
+{{!-- Split template. --}}
+{{#if split_template}}
+	{{#contentFor "body-class"}} page-template-split{{#has tag="#sidebar,#toc"}} post-has-sidebar{{/has}}{{/contentFor}}
+
+{{!-- Default template. --}}
+{{else}}
+	{{#has tag="#sidebar"}}{{#contentFor "body-class"}} post-has-sidebar{{/contentFor}}{{/has}}
+
+	{{!-- Hero. --}}
+	{{#if @page.show_title_and_feature_image}}
+		{{> "post/feature-image"}}
+
+		{{#unless html}}
+			{{> "sections/hero" feature_image=false}}
+		{{/unless}}
+	{{/if}}
+{{/if}}
+
+{{!-- Content. --}}
+{{#if html}}
+<div class="post-content-grid">
+	<div class="post-content-wrapper">
+		{{!-- Hero. --}}
+		{{#unless split_template}}
+			{{#if @page.show_title_and_feature_image}}
+				{{> "sections/hero" feature_image=false}}
+			{{/if}}
+		{{/unless}}
+
+		{{!-- TOC. --}}
+		{{^has tag="#sidebar"}}
+			{{#has tag="#toc"}}
+				{{> "post/toc" class=" toc-content container"}}
+			{{/has}}
+		{{/has}}
+
+		{{!-- Content. --}}
+		<div class="post-content{{#unless access}} post-content-teaser{{/unless}}">
+			{{{html}}}
+		</div>
+
+		{{!-- CTA. --}}
+		{{#unless access}}
+			{{> "post/content-cta"}}
+		{{/unless}}
+	</div>
+
+	{{#has tag="#sidebar,#toc"}}
+		<aside class="post-sidebar post-sidebar-sticky toc-scroll">
+			{{> "post/toc"}}
+
+			{{#if show_subscription}}
+				{{!-- Form subscribe (hide on --breakpoint-max-lg). --}}
+				{{> "form-subscribe" label="true"}}
+			{{/if}}
+		</aside>
+	{{/has}}
+</div>
+{{else}}
+	{{#unless access}}
+		{{!-- CTA. --}}
+		{{> "post/content-cta"}}
+	{{/unless}}
+{{/if}}
+
+{{#if show_subscription}}
+{{!-- Subscription (show on --breakpoint-max-lg) --}}
+{{> "sections/subscription"}}
+{{/if}}

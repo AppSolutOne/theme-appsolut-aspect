@@ -1,0 +1,117 @@
+/* stylelint-disable at-rule-no-unknown */
+
+div.tippy-box {
+	background-color: var(--color-overlay);
+	border-radius: var(--radius-1);
+	color: #fff;
+	font-size: var(--font-small);
+	font-weight: var(--font-weight-medium);
+}
+
+div.tippy-content {
+	padding: var(--spacing-2) var(--spacing-5);
+}
+
+/* Author. */
+.tippy-box[data-theme='author'] {
+	min-width: 200px;
+	background-color: var(--dropdown--background-color);
+	color: var(--color-foreground);
+	font-weight: var(--font-weight-regular);
+	border-radius: var(--radius-4);
+	box-shadow: var(--shadow);
+
+	.tooltip-avatar {
+		display: block;
+		margin-bottom: var(--spacing-6);
+		text-decoration: none;
+	}
+
+	.tooltip-title {
+		@mixin heading-6;
+
+		display: block;
+		color: var(--color-contrast);
+		text-decoration: none;
+
+		+ div {
+			margin-top: var(--spacing-5);
+		}
+	}
+
+	.tippy-content {
+		padding: var(--spacing-8);
+	}
+}
+
+/* Authors. */
+.tippy-box[data-theme='authors'] {
+	min-width: 200px;
+	background-color: var(--dropdown--background-color);
+	color: var(--color-foreground);
+	font-weight: var(--font-weight-regular);
+	border-radius: var(--radius-4);
+	box-shadow: var(--shadow);
+
+	.tooltip-author {
+		@mixin heading-6;
+
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-4);
+		text-decoration: none;
+
+		> .avatar {
+			flex: 0 0 auto;
+		}
+	}
+
+	.tippy-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-6);
+		padding: var(--spacing-8);
+		max-height: 200px;
+		overflow-y: auto;
+	}
+}
+
+/* Top. */
+div.tippy-box[data-placement^='top'] > .tippy-arrow::before {
+	left: 4px;
+	bottom: -4px;
+	border-left-width: 4px;
+	border-right-width: 4px;
+	border-top-width: 4px;
+	border-top-color: var(--color-overlay);
+}
+
+/* Bottom. */
+div.tippy-box[data-placement^='bottom'] > .tippy-arrow::before {
+	left: 4px;
+	top: -4px;
+	border-left-width: 4px;
+	border-right-width: 4px;
+	border-bottom-width: 4px;
+	border-bottom-color: var(--color-overlay);
+}
+
+/* Right. */
+div.tippy-box[data-placement^='right'] > .tippy-arrow::before {
+	left: -4px;
+	top: 3px;
+	border-top-width: 4px;
+	border-bottom-width: 4px;
+	border-right-width: 4px;
+	border-right-color: var(--color-overlay);
+}
+
+/* Left. */
+div.tippy-box[data-placement^='left'] > .tippy-arrow::before {
+	right: -4px;
+	top: 3px;
+	border-top-width: 4px;
+	border-bottom-width: 4px;
+	border-left-width: 4px;
+	border-left-color: var(--color-overlay);
+}

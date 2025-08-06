@@ -1,0 +1,27 @@
+{{#if @site.members_enabled}}
+	{{#unless @member}}
+		{{#if @custom.subscription_form_title}}
+			<form class="form-subscribe" data-members-form="subscribe">
+				{{#if label}}
+					<label for="{{#if email_id}}{{email_id}}{{else}}subscribe-email{{/if}}">{{@custom.subscription_form_title}}</label>
+				{{/if}}
+				<div>
+					<input type="email" id="{{#if email_id}}{{email_id}}{{else}}subscribe-email{{/if}}" placeholder="{{t "Type your email..."}}" required data-members-email>
+					<button class="button" type="submit">
+						{{#if @site.portal_button_signup_text}}
+							<span class="label hide-when-loading hide-when-success">{{@site.portal_button_signup_text}}</span>
+						{{else}}
+							<span class="label hide-when-loading hide-when-success">{{t "Subscribe"}}</span>
+						{{/if}}
+						<span class="label loading">{{t "Sending"}}{{> "icons/loader"}}</span>
+						<span class="label success">{{t "Sent"}}{{> "icons/check"}}</span>
+					</button>
+				</div>
+				<span class="form-alert">
+					<span class="success">{{t "Please check your inbox and click the confirmation link."}}</span>
+					<span class="error" data-members-error></span>
+				</span>
+			</form>
+		{{/if}}
+	{{/unless}}
+{{/if}}

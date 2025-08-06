@@ -1,0 +1,43 @@
+/* stylelint-disable at-rule-no-unknown */
+
+@define-mixin heading-1 {
+	font-size: 1.75rem; /* 28px */
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-family-headings);
+	line-height: 1.1;
+}
+
+@define-mixin heading-2 {
+	font-size: 1.375rem; /* 22px */
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-family-headings);
+	line-height: 1.2;
+}
+
+@define-mixin heading-3 {
+	font-size: 1.25rem; /* 20px */
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-family-headings);
+	line-height: 1.2;
+}
+
+@define-mixin heading-4 {
+	font-size: 1.188rem; /* 19px */
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-family-headings);
+	line-height: 1.2;
+}
+
+@define-mixin heading-5 {
+	font-size: 1.125rem; /* 18px */
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-family-headings);
+	line-height: 1.2;
+}
+
+@define-mixin heading-6 {
+	font-size: 1rem; /* 16px */
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-family-headings);
+	line-height: 1.2;
+}

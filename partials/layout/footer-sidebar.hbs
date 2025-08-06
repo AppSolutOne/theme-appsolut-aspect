@@ -1,0 +1,11 @@
+<div class="footer sidebar-footer">
+	{{> "components/social-links"}}
+
+	{{#if @site.secondary_navigation}}
+	<nav class="navigation navigation-sidebar-footer navigation-secondary" aria-label="{{navigation_aria_label}}">
+		{{navigation type="secondary" sidebar=false hide_current=true show_icon=false}}
+	</nav>
+	{{/if}}
+
+	{{> "layout/footer-copyright"}}
+</div>

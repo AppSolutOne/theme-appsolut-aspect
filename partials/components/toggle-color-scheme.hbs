@@ -1,0 +1,9 @@
+{{#if @custom.display_color_scheme_toggle}}
+<button class="nav-link toggle-color-scheme-button" value="dark-light-system" aria-label="{{t "Toggle color scheme"}}">
+	{{> "icons/moon"}}
+	<span class="label label-light">{{t "Theme: Light"}}</span>
+	<span class="label label-system">{{t "Theme: System"}}</span>
+	<span class="label label-dark">{{t "Theme: Dark"}}</span>
+	<span class="icon-wrapper">{{> "icons/sun"}}{{> "icons/circle-half"}}{{> "icons/moon" fill=true}}</span>
+</button>
+{{/if}}

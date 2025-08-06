@@ -1,0 +1,28 @@
+{{#*inline "author-social"}}
+	<li>
+		<a
+			class="social-link"
+			href="{{#if href}}{{href}}{{else}}{{social_url type=type}}{{/if}}"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			{{> @partial-block}}
+			<span class="label{{#if hide_label}} screen-reader-text{{/if}}">
+				{{label}}
+			</span>
+		</a>
+	</li>
+{{/inline}}
+
+<ul class="social-links social-links-author">
+	{{~#if website}}{{#> "author-social" label=(t "Website") href=website}}{{> "icons/glob"}}{{/"author-social"}}{{/if~}}
+	{{~#if twitter}}{{#> "author-social" label=(t "X") type="twitter"}}{{> "icons-social/twitter"}}{{/"author-social"}}{{/if~}}
+	{{~#if facebook}}{{#> "author-social" label=(t "Facebook") type="facebook"}}{{> "icons-social/facebook"}}{{/"author-social"}}{{/if~}}
+	{{~#if linkedin}}{{#> "author-social" label=(t "LinkedIn") type="linkedin"}}{{> "icons-social/linkedin"}}{{/"author-social"}}{{/if~}}
+	{{~#if bluesky}}{{#> "author-social" label=(t "Bluesky") type="bluesky"}}{{> "icons-social/bluesky"}}{{/"author-social"}}{{/if~}}
+	{{~#if threads}}{{#> "author-social" label=(t "Threads") type="threads"}}{{> "icons-social/threads"}}{{/"author-social"}}{{/if~}}
+	{{~#if mastodon}}{{#> "author-social" label=(t "Mastodon") type="mastodon"}}{{> "icons-social/mastodon"}}{{/"author-social"}}{{/if~}}
+	{{~#if tiktok}}{{#> "author-social" label=(t "TikTok") type="tiktok"}}{{> "icons-social/tiktok"}}{{/"author-social"}}{{/if~}}
+	{{~#if youtube}}{{#> "author-social" label=(t "YouTube") type="youtube"}}{{> "icons-social/youtube"}}{{/"author-social"}}{{/if~}}
+	{{~#if instagram}}{{#> "author-social" label=(t "Instagram") type="instagram"}}{{> "icons-social/instagram"}}{{/"author-social"}}{{/if~}}
+</ul>

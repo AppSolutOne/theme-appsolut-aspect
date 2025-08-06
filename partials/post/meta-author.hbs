@@ -1,0 +1,27 @@
+<li>
+	{{#primary_author}}
+	<div class="post-meta-author">
+		<a href="{{url}}" class="post-meta-author-image" tabindex="-1" aria-label="{{name}}" data-tooltip-custom="author">
+			{{> "components/avatar" size="large" src=profile_image}}
+		</a>
+		{{{t "by {author}" author=(concat "<a href=" url " data-tooltip-custom='author'>" name "</a>")}}}
+		{{> "components/tooltip-author"}}
+	</div>
+	{{/primary_author}}
+
+	{{#match authors.length ">" 1}}
+		{{#foreach authors from="2" to="2"}}
+			<div class="post-meta-author">
+				<a href="{{url}}" class="post-meta-author-image" data-tooltip-custom="author" aria-label="{{name}}">
+					{{> "components/avatar" src=profile_image}}
+				</a>
+				{{> "components/tooltip-author"}}
+			</div>
+		{{/foreach}}
+
+		<div class="post-meta-authors-more">
+			<button aria-label="{{t "View all authors"}}" data-tooltip-custom="authors" tabindex="-1">+{{#foreach authors}}{{#if @last}}{{@index}}{{/if}}{{/foreach}}</button>
+			{{> "components/tooltip-authors"}}
+		</div>
+	{{/match}}
+</li>

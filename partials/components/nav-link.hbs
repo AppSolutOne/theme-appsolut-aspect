@@ -1,0 +1,36 @@
+<{{#match href "false"}}span{{else}}a{{/match}}
+	{{#match href "!=" "false"}}
+		href="{{#if href}}{{href}}{{else}}{{url}}{{/if}}"
+	{{/match}}
+	class="{{#match href "!=" "false"}}nav-link nav-link-{{slug}}{{/match}}{{#if current}} nav-link-current{{/if}}{{#if class}} {{class}}{{/if}}"
+	{{#if show_icon}}
+		data-tippy-content="{{label}}"
+	{{/if}}
+>
+	{{!-- Icon menu. --}}
+	{{#match href "!=" "false"}}
+		{{#if show_icon}}
+			{{> "icons-menu/all"}}
+		{{/if}}
+	{{/match}}
+
+	{{!-- Circle for tags link. --}}
+	{{#if is_tag}}
+		<span
+			class="nav-link-circle"
+			{{#if accent_color}}
+			style="color: {{accent_color}}"
+			{{/if}}
+		></span>
+	{{/if}}
+
+	{{!-- Label. --}}
+	<span class="label">{{label}}</span>
+
+	{{!-- Arrow right for category link. --}}
+	{{#match href "!=" "false"}}
+		{{#if is_category}}
+			{{> "icons/arrow-narrow-right"}}
+		{{/if}}
+	{{/match}}
+</{{#match href "false"}}span{{else}}a{{/match}}>

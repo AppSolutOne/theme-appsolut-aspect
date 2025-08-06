@@ -1,0 +1,4 @@
+.section-read-next {
+	padding-top: var(--layout--gap);
+	border-top: 1px solid var(--color-border);
+}

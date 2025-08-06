@@ -1,0 +1,11 @@
+{{#if comments}}
+	<button
+		data-popup-toggle="#popup-comments"
+		class="button button-background-200 button-sm post-comments-button"
+		aria-expanded="false"
+	>
+		{{> "icons/message"}}
+		<span class="label">{{t "Comments"}}</span>
+		<span class="count">{{comment_count empty="" singular="" plural=""}}</span>
+	</button>
+{{/if}}

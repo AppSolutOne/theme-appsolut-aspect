@@ -1,0 +1,83 @@
+/* stylelint-disable at-rule-no-unknown */
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	color: var(--color-foreground);
+	font-family: var(--font-family-body);
+	font-size: 16px;
+	font-weight: var(--font-weight-regular);
+	line-height: 1.5;
+	font-style: normal;
+	background-color: var(--color-background);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	word-break: break-word;
+}
+
+body[style*='overflow'] {
+	padding-right: var(--scrollbar-width, 0);
+}
+
+/* Dot for tag title. */
+.title-tag-dot {
+	display: inline;
+	margin-left: var(--spacing-5);
+	color: var(--color-mute);
+
+	&::before {
+		content: '';
+		display: inline-block;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background-color: currentcolor;
+		vertical-align: 0.15em;
+	}
+
+	h1 > & {
+		margin-left: var(--spacing-6);
+
+		&::before {
+			vertical-align: 0.2em;
+		}
+	}
+}
+
+/* Hide ghost button member portal. */
+#ghost-portal-root > iframe {
+	display: none;
+}
+
+/* For skip buttons and more. */
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	word-wrap: normal !important;
+	border: 0;
+
+	&:not(:focus) {
+		padding: 0;
+	}
+
+	&:focus {
+		top: var(--spacing-6);
+		left: var(--spacing-6);
+		z-index: 100000;
+		display: block;
+		width: auto !important;
+		height: auto !important;
+		clip: auto !important;
+		clip-path: none;
+		text-decoration: none;
+	}
+}

@@ -1,0 +1,92 @@
+/* Default. */
+:where(.card-post-overlay) {
+	&.card-has-author .card-post-content {
+		padding-left: calc(
+			var(--avatar--size) + var(--spacing-6) + var(--card--content--padding)
+		);
+	}
+
+	.card-post-avatars {
+		position: absolute;
+		top: calc(var(--spacing-9) * 2);
+		left: var(--card--content--padding);
+	}
+}
+
+/* Simple. */
+:where(.card-post-overlay-simple) {
+	.card-post-content {
+		padding-right: var(--spacing-7);
+		padding-left: var(--spacing-7);
+	}
+}
+
+/* Base. */
+:where(.card-post-overlay, .card-post-overlay-simple) {
+	--card--content--padding: var(--spacing-6);
+
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+	aspect-ratio: 16/9;
+	border-radius: var(--radius-4);
+
+	.card-post-title {
+		margin-bottom: 0;
+	}
+
+	.card-post-title,
+	.card-post-title > a,
+	.card-post-author-name,
+	.card-post-meta,
+	.card-post-meta > a {
+		color: var(--color-white);
+	}
+
+	.card-post-author-name,
+	.card-post-meta > .card-post-date,
+	.card-post-meta > .card-post-meta-divider,
+	.card-post-meta > a {
+		opacity: 0.8;
+	}
+
+	.card-post-title > a:hover,
+	.card-post-meta > a:hover,
+	.card-post-author-name:hover {
+		color: var(--color-white);
+		opacity: 1;
+	}
+
+	/* Badge. */
+	.card-post-image-badge {
+		top: var(--spacing-6);
+		bottom: auto;
+	}
+
+	/* Image. */
+	.card-post-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	/* Content. */
+	.card-post-content {
+		/* Gradient: start 0%, height 100%, opacity 60%. */
+		@mixin gradient-overlay 0%, 100%, 60%;
+
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		padding-top: calc(var(--spacing-9) * 2);
+		padding-bottom: var(--spacing-6);
+		border-radius: 0 0 var(--radius-4) var(--radius-4);
+		pointer-events: none;
+
+		a {
+			pointer-events: visible;
+		}
+	}
+}

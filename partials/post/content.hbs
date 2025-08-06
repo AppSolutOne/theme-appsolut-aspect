@@ -1,0 +1,46 @@
+{{#if html}}
+	{{#unless hide_wrapper}}
+	<div class="post-content-grid">
+	{{/unless}}
+
+		{{!-- Tags. --}}
+		{{#unless hide_tags}}
+		{{> "post/tags" class="container"}}
+		{{/unless}}
+
+		<div class="post-content-wrapper">
+			{{!-- Toc. --}}
+			{{#> "without-sidebar"}}
+				{{^has tag="#hide-toc"}}
+					{{> "post/toc" class=" toc-content container"}}
+				{{/has}}
+			{{/"without-sidebar"}}
+
+			{{!-- Content. --}}
+			<div class="post-content{{#unless access}} post-content-teaser{{/unless}}">
+				{{{html}}}
+			</div>
+
+			{{!-- CTA. --}}
+			{{#unless access}}
+				{{> "post/content-cta"}}
+			{{/unless}}
+
+			{{!-- Author card (show on --breakpoint-max-lg). --}}
+			{{> "post/card-author"}}
+		</div>
+
+		{{!-- Sidebar. --}}
+		{{#> "with-sidebar"}}
+			{{> "post/sidebar"}}
+		{{/"with-sidebar"}}
+
+	{{#unless hide_wrapper}}
+	</div>
+	{{/unless}}
+{{else}}
+	{{#unless access}}
+		{{!-- CTA. --}}
+		{{> "post/content-cta"}}
+	{{/unless}}
+{{/if}}

@@ -1,0 +1,21 @@
+{{!--
+	Section.
+
+	Variables:
+		- nav: data included in {{navigation}}.
+		- item: data included in the link.
+		- this: all data.
+--}}
+
+<li class="nav-section">
+	{{#match item.url '#'}}
+		<span class="nav-link nav-section-link">
+			<span class="label">{{item.label}}</span>
+		</span>
+	{{else}}
+		<a class="nav-link nav-section-link nav-link-{{item.slug}}" href="{{item.url}}">
+			<span class="label">{{item.label}}</span>
+			{{> "icons/arrow-narrow-right"}}
+		</a>
+	{{/match}}
+</li>

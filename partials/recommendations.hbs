@@ -1,0 +1,25 @@
+{{#match @site.recommendations_enabled}}
+{{#if recommendations}}
+	<ul class="recommendations-list">
+		{{#foreach recommendations limit=limit}}
+			<li>
+				<div class="card card-recommendation">
+					<a class="card-link" href="{{this.url}}" aria-label="{{title}}" target="_blank" rel="noopener"></a>
+
+					{{#if favicon}}
+					<picture class="card-image">
+						<img src="{{favicon}}" alt="{{title}}" width="28" height="28" loading="lazy">
+					</picture>
+					{{/if}}
+
+					<h3 class="card-title">{{title}}</h3>
+
+					{{#if description}}
+						<div class="card-description">{{description}}</div>
+					{{/if}}
+				</div>
+			</li>
+		{{/foreach}}
+	</ul>
+{{/if}}
+{{/match}}

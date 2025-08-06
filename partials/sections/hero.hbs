@@ -1,0 +1,36 @@
+<section class="section section-hero{{#if feature_image}} has-feature-image{{/if}}">
+	{{#if feature_image}}
+	<figure class="section-hero-image">
+		{{> "components/image" fast="true" size=image_size src=feature_image alt=feature_image_alt altElse=title}}
+		{{#if feature_image_caption}}
+			<figcaption>{{feature_image_caption}}</figcaption>
+		{{/if}}
+	</figure>
+	{{/if}}
+
+	<div class="section-hero-content">
+		{{#if total_posts}}
+		<div class="section-hero-meta">
+			{{#if location}}
+				<div>{{location}}</div>
+				<div>&bull;</div>
+			{{/if}}
+			<div>{{plural total_posts empty="0 posts" singular=(t "% post") plural=(t "% posts")}}</div>
+		</div>
+		{{/if}}
+
+		<h1>{{title}}{{#if show_tag_dot}}<span class="title-tag-dot" {{#if accent_color}}style="color:{{accent_color}};"{{/if}}></span>{{/if}}</h1>
+
+		{{#if custom_excerpt}}
+			<p>{{custom_excerpt}}</p>
+		{{/if}}
+
+		{{#if is_author}}
+			{{> "components/social-links-author"}}
+		{{/if}}
+
+		{{#if show_subscription}}
+			{{> "form-subscribe" label=true}}
+		{{/if}}
+	</div>
+</section>

@@ -1,0 +1,24 @@
+@define-mixin gradient-overlay $start: 0%, $height: 100%, $opacity: 60% {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(0deg 0% 0% / 0%) 0%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.03)) 7.7%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.065)) 15%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.118)) 21.9%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.188)) 28.5%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.272)) 34.8%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.363)) 41%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.46)) 47%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.557)) 53%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.653)) 59%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.745)) 65.2%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.828)) 71.5%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.898)) 78.1%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.952)) 85%,
+    hsl(0deg 0% 0% / calc($(opacity) * 0.987)) 92.3%,
+    hsl(0deg 0% 0% / $(opacity)) 100%
+  );
+  background-position: 0 $(start);
+  background-size: 100% $(height);
+  background-repeat: no-repeat;
+}

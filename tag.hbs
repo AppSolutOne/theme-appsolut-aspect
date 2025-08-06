@@ -1,0 +1,16 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#tag}}
+	{{> "sections/tags"}}
+
+	{{> "sections/hero"
+		title=name
+		total_posts=../pagination.total
+		show_tag_dot=true
+		custom_excerpt=description
+		image_size="600"
+	}}
+{{/tag}}
+
+{{> "sections/posts"}}

@@ -1,0 +1,15 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#author}}
+	{{> "sections/hero"
+		feature_image=cover_image
+		image_size="200"
+		title=name
+		custom_excerpt=bio
+		total_posts=../pagination.total
+		is_author=true
+	}}
+{{/author}}
+
+{{> "sections/posts"}}

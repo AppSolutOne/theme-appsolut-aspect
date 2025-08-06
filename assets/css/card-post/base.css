@@ -1,0 +1,189 @@
+/* Base. */
+.card-post-image-badge {
+	position: absolute;
+	right: var(--spacing-6);
+	bottom: var(--spacing-6);
+	z-index: 1;
+	display: flex;
+	gap: var(--spacing-3);
+
+	> span {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-width: 1.5rem; /* 24px. */
+		min-height: 1.5rem; /* 24px. */
+		padding: var(--spacing-1) var(--spacing-4);
+		border-radius: var(--radius-1);
+		background-color: hsl(0deg 0% 2% / 70%);
+		color: var(--color-white);
+		font-size: var(--font-x-small);
+		font-weight: var(--font-weight-medium);
+	}
+
+	> .card-post-icon {
+		padding-right: var(--spacing-1);
+		padding-left: var(--spacing-1);
+
+		> svg {
+			width: var(--font-small);
+			height: var(--font-small);
+		}
+
+		path {
+			stroke-width: 1.75;
+		}
+	}
+}
+
+/* Image. */
+.card-post-image {
+	position: relative;
+	z-index: 1;
+	border-radius: var(--radius-4);
+	background-color: var(--color-background-200);
+	aspect-ratio: 16/9;
+	overflow: hidden;
+
+	> picture {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+/* Image link. */
+.card-post-image-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+}
+
+/* Content. */
+.card-post-content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 0 var(--card--content--padding);
+}
+
+/* Title. */
+.card-post-title {
+	font-size: 1rem;
+	font-weight: var(--font-weight-semibold);
+
+	> a {
+		display: block;
+		text-decoration: none;
+	}
+
+	> a:hover,
+	> a:focus-visible {
+		color: var(--ghost-accent-color);
+	}
+}
+
+/* Authors more. */
+.card-post-authors-more {
+	display: flex;
+
+	> button {
+		padding: 0 5px;
+		border: 0;
+		border-radius: 4px;
+		background-color: var(--color-background-200);
+		color: var(--color-secondary);
+		font-size: var(--font-x-small);
+		font-weight: var(--font-weight-medium);
+		line-height: 1.3;
+		transition:
+			color 0.15s ease,
+			background-color 0.15s ease;
+		flex: 0 0 auto;
+		cursor: pointer;
+
+		&[aria-expanded='true'],
+		&:hover {
+			background-color: var(--color-background-300);
+			color: var(--color-contrast);
+		}
+	}
+}
+
+/* Author. */
+.card-post-author {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-4);
+}
+
+/* Author name. */
+.card-post-author-name {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-4);
+	color: var(--color-foreground);
+	font-size: var(--font-small);
+	font-weight: var(--font-weight-medium);
+	text-decoration: none;
+
+	&:hover,
+	&:focus-visible {
+		color: var(--ghost-accent-color);
+	}
+}
+
+/* Meta. */
+.card-post-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0 var(--spacing-3);
+	color: var(--color-foreground);
+	font-size: var(--font-small);
+	font-weight: var(--font-weight-medium);
+
+	> a {
+		color: var(--color-foreground);
+		text-decoration: none;
+
+		&:hover,
+		&:focus-visible {
+			color: var(--ghost-accent-color);
+		}
+	}
+}
+
+/* Avatars. */
+:where(.card-post-classic, .card-post-overlay, .card-post-list) {
+	.card-post-avatar + .card-post-avatar {
+		--avatar--size: 1rem;
+		--avatar--font-size: 0.525rem;
+
+		position: absolute;
+		right: -0.25rem;
+		bottom: -0.25rem;
+		z-index: 1;
+		width: var(--avatar--size);
+		height: var(--avatar--size);
+	}
+
+	.card-post-avatar:has(+ .card-post-avatar) .avatar {
+		mask-image: radial-gradient(
+			circle calc(1rem + 4px) at calc(100% - 4px) calc(100% - 4px),
+			transparent 50%,
+			black calc(50% + 1px)
+		);
+	}
+}

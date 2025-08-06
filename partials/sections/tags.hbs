@@ -1,0 +1,17 @@
+{{#> "get-tags" setting=@custom.tags_list}}
+	<nav class="swiper slider-tags section-tags" aria-label="{{t "Tags Navigation"}}" data-initial-slide="{{#foreach tags}}{{#has slug=../../slug}}{{@index}}{{/has}}{{/foreach}}">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<a href="{{@site.url}}"{{#if ../is_home}} class="current"{{/if}}>{{t "All Posts"}}</a>
+			</div>
+			{{#foreach tags}}
+			<div class="swiper-slide">
+				<a href="{{url}}"{{#has slug=../../slug}} class="current"{{/has}}>{{name}}</a>
+			</div>
+			{{/foreach}}
+		</div>
+
+		<div class="slider-button slider-button-next">{{> "icons/chevron-right"}}</div>
+		<div class="slider-button slider-button-prev">{{> "icons/chevron-left"}}</div>
+	</nav>
+{{/"get-tags"}}

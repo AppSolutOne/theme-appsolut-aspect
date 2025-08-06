@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html
+	lang="{{@site.locale}}"
+	data-color-scheme="{{#match @custom.color_scheme "Dark"}}dark{{else match @custom.color_scheme "Light"}}light{{else}}system{{/match}}"
+	data-sidebar-collapsed="{{#if @custom.sidebar_collapsed}}true{{else}}false{{/if}}"
+>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{{!-- Basic meta - advanced meta is output with {{ghost_head}} below --}}
+	<title>{{meta_title page=(t " (Page %)")}}</title>
+
+	{{!-- Script for theme data --}}
+	{{> "theme-head-script"}}
+
+	{{!-- Script for color scheme --}}
+	{{#if @custom.display_color_scheme_toggle}}
+	{{> "color-scheme-head-script"}}
+	{{/if}}
+
+	{{!-- Script for collapse sidebar. --}}
+	<script>
+		// Set sidebar collapsed from local storage.
+		(function() {
+			const hasCollapsed = localStorage.getItem('sidebar-collapsed');
+
+			if (hasCollapsed !== null) {
+				document.documentElement.setAttribute('data-sidebar-collapsed', hasCollapsed);
+			}
+		})();
+	</script>
+
+	{{!-- Preload scripts --}}
+	<link rel="preload" as="style" href="{{asset "built/index.css"}}">
+	<link rel="preload" as="script" href="{{asset "assets/vendors/pvs.min.js"}}">
+	<link rel="preload" as="script" href="{{asset "built/index.js"}}">
+
+	{{!-- Preload font. --}}
+	<link rel="preload" href="{{asset "vendors/Geist-Variable.woff2"}}" as="font" type="font/woff2" crossorigin/>
+
+	{{!-- Preload main styles and scripts for better performance --}}
+	<style>
+		@font-face {
+			font-family: 'Geist';
+			font-display: swap;
+			src: url({{asset "vendors/Geist-Variable.woff2"}}) format("woff2-variations");
+			font-weight: 100 900;
+		}
+
+		:root {
+			{{#if @custom.dark_mode_accent_color}}--color-dark-accent: {{@custom.dark_mode_accent_color}};{{/if}}
+			{{#if @custom.foreground_accent_color}}--color-accent-foreground: {{@custom.foreground_accent_color}};{{/if}}
+			{{#if @custom.dark_mode_foreground_accent_color}}--color-dark-accent-foreground: {{@custom.dark_mode_foreground_accent_color}};{{/if}}
+			--featured-image--aspect-ratio: {{@custom.feature_image_aspect_ratio}};
+		}
+	</style>
+
+	{{!-- PVS styles. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "assets/vendors/pvs.min.css"}}">
+
+	{{!-- Theme styles. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "built/index.css"}}">
+
+	{{!-- Ivent. --}}
+	<script src="{{asset "assets/vendors/ivent.min.js"}}"></script>
+
+	{{!-- PVS. --}}
+	<script src="{{asset "assets/vendors/pvs.min.js"}}"></script>
+
+	{{!-- Swiper. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "assets/vendors/swiper/swiper.min.css"}}">
+	<link rel="stylesheet" type="text/css" href="{{asset "assets/vendors/swiper/free-mode.min.css"}}">
+	<link rel="stylesheet" type="text/css" href="{{asset "assets/vendors/swiper/mousewheel.min.css"}}">
+	<link rel="stylesheet" type="text/css" href="{{asset "assets/vendors/swiper/navigation.min.css"}}">
+
+	{{!-- Featured section. --}}
+	{{{block "featured-section-styles"}}}
+
+	{{!-- Tippy. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "assets/vendors/tippy.css"}}">
+
+	{{!-- Custom. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "custom.css"}}">
+
+	{{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings, it should always be the last tag before the closing head tag --}}
+	{{ghost_head}}
+</head>
+
+<body class="{{body_class}} layout-default{{block "body-class"}}">
+	<a href="#sidebar" class="button screen-reader-text">{{t "Skip to Sidebar"}}</a>
+	<a href="#content" class="button screen-reader-text">{{t "Skip to Content"}}</a>
+
+	<main class="main">
+		{{!-- Navbar. --}}
+		<div class="navbar">
+			{{!-- Logo, burger, back to home link. --}}
+			<div>
+				{{!-- Collapse sidebar. --}}
+				<button
+					class="toggle-sidebar button button-icon button-transparent button-rounded"
+					aria-label="{{t "Collapse Sidebar"}}"
+					aria-expanded="{{#if @custom.sidebar_collapsed}}false{{else}}true{{/if}}"
+				>
+					{{> "icons/burger"}}
+				</button>
+
+				{{!-- Popup navigation. --}}
+				<button class="toggle-popup button button-icon button-transparent button-rounded" data-popup-toggle="#popup-navigation" aria-expanded="false" aria-label="{{t 'Open a popup with navigation'}}">
+					{{> "icons/burger"}}
+				</button>
+
+				{{> "components/logo"}}
+			</div>
+
+			{{!-- Search toggle. --}}
+			<button class="search-toggle" data-ghost-search>
+				{{> "icons/search"}}{{t "Search"}}
+				<svg class="icon-slash" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="16" height="16" rx="3" fill="#808080" /> {{!-- Changing fill in css. --}}
+					<path d="M6.33331 11.3333L9.66665 4.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</button>
+
+			<nav class="navigation" aria-label="{{t "User Navigation"}}">
+				<button class="dropdown-toggle" aria-expanded="false" aria-label="{{t "Show user navigation"}}">
+					{{#if @member}}
+						{{> "components/avatar" src=@member.avatar_image name=@member.name}}
+					{{else}}
+						{{> "components/avatar" size="anonymous"}}
+					{{/if}}
+				</button>
+				<div class="dropdown dropdown-user{{#if @member}} dropdown-user-login{{/if}} dropdown-align-left">
+					{{!-- User navigation --}}
+					{{#if @member}}
+					<div class="dropdown-user-head">
+						{{> "components/avatar" size="large" src=@member.avatar_image name=@member.name}}
+						<span class="dropdown-user-name">{{@member.name}}</span>
+						<span class="dropdown-user-mail">{{@member.email}}</span>
+					</div>
+					<hr>
+					<ul>
+						<li>
+							<a href="#/portal/account" class="nav-link">
+								{{> "icons/settings"}}
+								{{t "Account Settings"}}
+							</a>
+						</li>
+						<li>{{> "components/toggle-color-scheme"}}</li>
+						<li class="nav-separator"></li>
+						<li>
+							<a href="javascript:" class="nav-link" data-members-signout>
+								{{> "icons/log-out"}}
+								{{t "Sign out"}}
+							</a>
+						</li>
+					</ul>
+
+					{{!-- Login navigation --}}
+					{{else}}
+					<div class="dropdown-user-head">
+						{{> "components/avatar" size="anonymous"}}
+						<span class="dropdown-user-name">{{t "Anonymous"}}</span>
+					</div>
+					<hr>
+					<ul>
+						<li>
+							{{> "components/toggle-color-scheme"}}
+						</li>
+						{{#if @site.members_enabled}}
+						<li>
+							<a href="{{#match (t "/signin/") "!=" "false"}}{{t "/signin/"}}{{else}}#/portal/signin{{/match}}" class="nav-link">
+								{{> "icons-menu/log-in"}}
+								{{t "Sign in"}}
+							</a>
+						</li>
+						{{/if}}
+					</ul>
+					{{/if}}
+				</div>
+			</nav>
+		</div>
+
+		{{!-- Sidebar. --}}
+		<aside class="sidebar" id="sidebar">
+			{{!-- Navigation. --}}
+			{{#if @site.navigation}}
+			<nav class="navigation navigation-sidebar" aria-label="{{t "Sidebar Primary Navigation"}}">
+				{{navigation sidebar=true show_icon=true}}
+			</nav>
+			{{/if}}
+
+			{{!-- Tags. --}}
+			{{#> "get-tags" setting=@custom.tags_list_sidebar}}
+				{{#if tags}}
+					<nav class="navigation navigation-sidebar navigation-tags" aria-label="{{t "Sidebar Tags Navigation"}}">
+						{{!-- Tags list for open sidebar. --}}
+						{{> "components/nav-link" is_category=true class=(concat "nav-section-link" (link_class for=(t "/tags/") activeClass=" nav-link-current")) href=(t "/tags/") slug="tags" label=(t "Tags") show_icon=true}}
+						<ul>
+							{{#foreach tags}}
+							<li>
+								{{> "components/nav-link" is_tag=true label=name}}
+							</li>
+							{{/foreach}}
+						</ul>
+
+						{{!-- Dropdown tags for hide sidebar. --}}
+						<button
+							class="navigation-dropdown-toggle"
+							aria-expanded="false"
+							aria-controls="nav-dropdown-content-tags"
+							aria-label="{{t "Show tags navigation"}}"
+							id="nav-dropdown-toggle-tags"
+						></button>
+						<div
+							class="navigation-dropdown navigation-dropdown-tags"
+							aria-labelledby="nav-dropdown-toggle-tags"
+							id="nav-dropdown-content-tags"
+						>
+							<ul>
+								{{#foreach tags}}
+								<li>
+									{{> "components/nav-link" is_tag=true label=name}}
+								</li>
+								{{/foreach}}
+							</ul>
+						</div>
+					</nav>
+				{{/if}}
+			{{/"get-tags"}}
+
+			{{!-- Footer. --}}
+			{{> "layout/footer-sidebar" navigation_aria_label=(t "Sidebar Secondary Navigation")}}
+		</aside>
+
+		{{!-- Content. --}}
+		<{{#is "home"}}div{{else}}article{{/is}} id="content" class="content{{#is "post"}} post{{/is}}">
+			{{{body}}}
+		</{{#is "home"}}div{{else}}article{{/is}}>
+
+		{{!-- Footer. --}}
+		{{> "layout/footer"}}
+	</main>
+
+	{{!-- Popup navigation. --}}
+	<div class="popup popup-navigation" data-popup-id="popup-navigation" role="dialog" aria-modal="true" aria-hidden="true" aria-label="{{t "You can hide this popup with the ESC key"}}">
+		<div class="popup-container">
+			<div class="popup-head">
+				<button class="popup-close button button-icon button-background-100 button-sm button-rounded" aria-label="{{t "Hide popup"}}">
+					{{> "icons/x-close"}}
+				</button>
+				{{> "components/logo"}}
+			</div>
+
+			<div class="popup-body">
+				{{!-- Navigation. --}}
+				{{#if @site.navigation}}
+				<nav class="navigation navigation-popup" aria-label="{{t "Popup Primary Navigation"}}">
+					{{navigation sidebar=false dropdown=false show_icon=true}}
+				</nav>
+				{{/if}}
+
+				{{!-- Tags. --}}
+				{{#> "get-tags" setting=@custom.tags_list_sidebar}}
+					{{#if tags}}
+						<nav class="navigation navigation-popup navigation-tags" aria-label="{{t "Popup Tags Navigation"}}">
+							{{> "components/nav-link" is_category=true class=(concat "nav-section-link" (link_class for=(t "/tags/") activeClass=" nav-link-current")) href=(t "/tags/") slug="tags" label=(t "Tags") show_icon=true}}
+							<ul>
+								{{#foreach tags}}
+								<li>
+									{{> "components/nav-link" is_tag=true label=name}}
+								</li>
+								{{/foreach}}
+							</ul>
+						</nav>
+					{{/if}}
+				{{/"get-tags"}}
+
+				{{!-- Footer. --}}
+				{{> "layout/footer-sidebar" navigation_aria_label=(t "Popup Secondary Navigation")}}
+			</div>
+		</div>
+
+		<button class="popup-overlay popup-close" aria-label="{{t "Hide popup"}}" tabindex="-1"></button>
+	</div>
+
+	{{!-- Motion. --}}
+	<script src="{{asset "assets/vendors/motion.min.js"}}"></script>
+
+	{{!-- Tippy. --}}
+	<script src="{{asset "assets/vendors/popper.min.js"}}"></script>
+	<script src="{{asset "assets/vendors/tippy.umd.min.js"}}"></script>
+
+	{{!-- Featured section. --}}
+	{{{block "featured-section-scripts"}}}
+
+	{{!-- Theme script. --}}
+	<script src="{{asset "built/index.js"}}"></script>
+
+	{{!-- Sliders. --}}
+	<script src="{{asset "built/slider-tags.js"}}"></script>
+	<script src="{{asset "built/slider-cards.js"}}"></script>
+
+	{{!-- Announcement bar. --}}
+	<script src="{{asset "built/announcement-bar.js"}}"></script>
+
+	{{!-- Custom. --}}
+	<script src="{{asset "custom.js"}}"></script>
+
+	{{!-- Ghost outputs required functional scripts with this tag, it should always be the last thing before the closing body tag --}}
+	{{ghost_foot}}
+</body>
+</html>

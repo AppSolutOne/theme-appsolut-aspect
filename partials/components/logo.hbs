@@ -1,0 +1,11 @@
+<a class="logo" href="{{@site.url}}" aria-label="{{@site.title}}">
+	{{#if @site.logo}}
+		<img {{#if @custom.dark_mode_logo}}class="logo-light" {{/if}}src="{{@site.logo}}" alt="{{@site.title}}">
+	{{else}}
+		<span{{#if @custom.dark_mode_logo}} class="logo-light"{{/if}}>{{@site.title}}</span>
+	{{/if}}
+
+	{{#if @custom.dark_mode_logo}}
+		<img class="logo-dark" src="{{@custom.dark_mode_logo}}" alt="{{@site.title}}">
+	{{/if}}
+</a>

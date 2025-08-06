@@ -1,0 +1,37 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.logo {
+	flex: 0 0 auto;
+	display: inline-block;
+	color: var(--color-contrast);
+	font-size: var(--font-small);
+	font-weight: var(--font-weight-medium);
+	line-height: initial;
+	text-decoration: none;
+
+	img {
+		width: auto;
+		height: auto;
+		max-height: var(--logo--max-height, 1.25rem);
+	}
+}
+
+@mixin color-scheme-dark {
+	.logo-light {
+		display: none;
+	}
+
+	.logo-dark {
+		display: block;
+	}
+}
+
+@mixin color-scheme-light {
+	.logo-light {
+		display: block;
+	}
+
+	.logo-dark {
+		display: none;
+	}
+}

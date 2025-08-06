@@ -1,0 +1,36 @@
+{{!--
+	Get data from page with slug "home-hero" and handle different content scenarios.
+
+	Data sources (in order of priority):
+	- Title (falls back to site title if page title is "(Untitled)")
+	- Custom Excerpt (highest priority)
+	- Auto-generated Excerpt (from content)
+	- Site Description (fallback when no hero page exists)
+	- Feature Image (from hero page)
+
+	If page title is "(Untitled)": uses site title and hide hero.
+ --}}
+
+{{#*inline "get-hero-excerpt"}}
+	{{#if custom_excerpt}}
+		{{> @partial-block excerpt=custom_excerpt}}
+	{{else if excerpt}}
+		{{> @partial-block}}
+	{{else}}
+		{{> @partial-block excerpt=false}}
+	{{/if}}
+{{/inline}}
+
+{{#get "pages" slug="home-hero" limit="1" as |hero|}}
+	{{#foreach hero}}
+		{{#> "get-hero-excerpt"}}
+			{{#match title '(Untitled)'}}
+				{{> @partial-block title=@site.title hide_title=true excerpt=false feature_image=false hide_subscription=true}}
+			{{else}}
+				{{> @partial-block}}
+			{{/match}}
+		{{/"get-hero-excerpt"}}
+	{{/foreach}}
+{{else}}
+	{{> @partial-block hide_title=true title=@site.title}}
+{{/get}}

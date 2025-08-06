@@ -1,0 +1,23 @@
+.author-template {
+	.section-hero-image {
+		order: -1;
+		flex: 0 0 auto;
+	}
+
+	.section-hero-image img {
+		width: 210px;
+		aspect-ratio: 3/4;
+		border-radius: var(--radius-4);
+	}
+
+	@media (--breakpoint-max-md) {
+		.section-hero {
+			flex-direction: column;
+			text-align: center;
+		}
+
+		.section-hero-meta {
+			justify-content: center;
+		}
+	}
+}

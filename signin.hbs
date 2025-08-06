@@ -1,0 +1,54 @@
+{{!< default-simple}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#> "layout/split"}}
+
+	{{!-- Everything inside the #page block pulls data from the page. --}}
+	{{#page}}
+
+		{{!-- Hero. --}}
+		{{#if @page.show_title_and_feature_image}}
+			<h1>{{title}}</h1>
+			{{#if custom_excerpt}}
+				<p>{{custom_excerpt}}</p>
+			{{/if}}
+		{{/if}}
+
+	{{!-- Hero default. --}}
+	{{else}}
+		<h1>{{t "Sign in"}}</h1>
+		{{!-- Invite only. --}}
+		{{#if @site.members_invite_only}}
+			<p>{{t "Welcome back to our blog! Sign in to access your saved articles, personal reading list, and join the discussion."}}</p>
+
+		{{!-- Access. --}}
+		{{else if @site.members_enabled}}
+			<p>{{t "Sign into your account again and see the entire library of members-only content & updates."}}</p>
+
+		{{!-- Nobody. --}}
+		{{else}}
+			<p>{{t "Our blog's authentication system is currently under maintenance. In the meantime, you can still enjoy our public articles."}}</p>
+		{{/if}}
+	{{/page}}
+
+	{{!-- Form. --}}
+	{{#if @site.members_enabled}}
+		<form data-members-form="signin">
+			<input data-members-email placeholder="{{t 'Your email'}}" type="email" id="email" required />
+
+			<span class="form-alert">
+				<span class="success">{{t "Success! Check your inbox for our email."}}</span>
+				<span data-members-error class="error"></span>
+			</span>
+
+			<button type="submit">
+				<span class="label hide-when-loading">{{t 'Sign in'}}</span>
+				<span class="label loading">{{t 'Sending'}}{{> "icons/loader"}}</span>
+			</button>
+
+			{{^if @site.members_invite_only}}
+				<p>{{t "Don't have an account?"}} <a href="{{#match (t "/signup/") "!=" "false"}}{{t "/signup/"}}{{else}}#/portal/signup{{/match}}">{{t "Sign up"}}</a></p>
+			{{/if}}
+		</form>
+	{{/if}}
+{{/"layout/split"}}

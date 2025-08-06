@@ -1,0 +1,25 @@
+/* stylelint-disable at-rule-no-unknown */
+
+@define-mixin color-scheme-dark $root {
+	$(root)[data-color-scheme="dark"] {
+		@mixin-content;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		$(root)[data-color-scheme="system"] {
+			@mixin-content;
+		}
+	}
+}
+
+@define-mixin color-scheme-light $root {
+	$(root)[data-color-scheme="light"] {
+		@mixin-content;
+	}
+
+	@media (prefers-color-scheme: light) {
+		$(root)[data-color-scheme="system"] {
+			@mixin-content;
+		}
+	}
+}

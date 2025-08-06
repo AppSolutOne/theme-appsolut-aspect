@@ -1,0 +1,27 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.layout-error {
+	.main {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.content {
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: var(--spacing-7);
+		padding: var(--layout--padding);
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 100px;
+		font-weight: var(--font-weight-bold);
+	}
+
+	.button {
+		margin-top: var(--spacing-6);
+	}
+}

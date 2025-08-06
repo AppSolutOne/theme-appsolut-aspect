@@ -1,0 +1,84 @@
+:where(.dropdown-share, .dropdown-user) {
+	--nav--link--icon--size: 1.125rem;
+}
+
+.navigation-dropdown {
+	--dropdown--offset: var(--spacing-5);
+
+	position: fixed;
+	display: none;
+	top: 0;
+	left: 100%;
+	padding: 0;
+	margin-top: calc(var(--dropdown--padding-v) * -1);
+	margin-left: var(--dropdown--offset);
+	min-width: 180px;
+	visibility: hidden;
+	opacity: 0;
+
+	&::before {
+		top: 0;
+		right: 100%;
+		bottom: 0;
+		left: auto;
+		width: var(--dropdown--offset);
+	}
+
+	> ul {
+		display: flex;
+		flex-direction: column;
+		gap: var(--nav--dropdown--gap);
+		max-height: calc(100vh - var(--navbar--height) - var(--spacing-2) * 2);
+		padding: var(--dropdown--padding-v) var(--dropdown--padding-h);
+		overflow: hidden auto;
+		border-radius: var(--dropdown--border-radius);
+	}
+
+	.nav-section-link {
+		margin-top: 0;
+	}
+
+	&.show,
+	&:hover {
+		visibility: visible;
+		opacity: 1;
+		transform: translate(0);
+	}
+}
+
+/* Dropdown toggle. */
+.navigation-dropdown-toggle {
+	position: absolute;
+	display: none;
+	top: 50%;
+	right: calc(-12px - var(--spacing-2));
+	margin-top: -6px;
+	padding: 0;
+	border: 0;
+	background-color: transparent;
+	visibility: hidden;
+	z-index: 1;
+	transition: visibility 0.01s;
+
+	&:focus-visible,
+	.nav-link:focus-visible ~ & {
+		visibility: visible;
+	}
+
+	&::before {
+		content: '';
+		display: block;
+		width: 12px;
+		height: 12px;
+		mask-image: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.25 10.5L8.75 7L5.25 3.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+		mask-size: 100% 100%;
+		background-color: var(--color-contrast);
+	}
+}
+
+@mixin sidebar-collapsed {
+	.navigation-dropdown,
+	.navigation-dropdown-toggle {
+		display: block;
+	}
+}

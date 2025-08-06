@@ -1,0 +1,4 @@
+.kg-image-card > img {
+	border-radius: var(--radius-4);
+	background-color: var(--color-border);
+}

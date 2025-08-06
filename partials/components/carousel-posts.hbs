@@ -1,0 +1,19 @@
+{{#if posts}}
+	{{#> "settings/post-card"}}
+		{{#if photo_card_list}}
+			<div class="section section-posts-list">
+				<div class="posts-list">
+					{{#foreach posts}}
+						<li>
+							{{> "components/card-post" style=../post_card_style}}
+						</li>
+					{{/foreach}}
+				</div>
+			</div>
+		{{else}}
+			{{#> "components/carousel-cards" cards=posts class="slider-posts"}}
+				{{> "components/card-post" style=../post_card_style}}
+			{{/"components/carousel-cards"}}
+		{{/if}}
+	{{/"settings/post-card"}}
+{{/if}}

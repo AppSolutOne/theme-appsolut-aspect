@@ -1,0 +1,133 @@
+/* stylelint-disable at-rule-no-unknown */
+.section-hero {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--spacing-9) var(--layout--padding);
+
+	.post-content-wrapper > & {
+		margin-bottom: calc(var(--spacing-9) * 2);
+	}
+
+	&.has-feature-image + .section-tags,
+	.section-tags + &.has-feature-image {
+		margin-top: calc(var(--layout--gap) * -1 + var(--spacing-9));
+	}
+
+	.section-tags + &:not(.has-feature-image) {
+		margin-top: calc(var(--layout--gap) * -1 + var(--spacing-9) * 2);
+	}
+}
+
+/* For home. */
+.page-home {
+	.section-hero:not(.has-feature-image) {
+		padding-top: var(--spacing-9);
+	}
+}
+
+/* Width for pages. */
+.page-template {
+	.section-hero:not(.has-feature-image) {
+		width: var(--container--width);
+		max-width: 100%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.content > .section-hero:not(.has-feature-image) {
+		padding-top: var(--spacing-9);
+	}
+
+	&.post-has-sidebar .content > .section-hero:not(.has-feature-image) {
+		width: var(--container-wide--width);
+	}
+
+	&.page-archive .content > .section-hero,
+	&.page-authors .content > .section-hero,
+	&.page-recommendations .content > .section-hero,
+	&.page-tags .content > .section-hero {
+		margin-left: 0;
+	}
+}
+
+.section-hero-content {
+	flex: 1 0 0%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-7);
+	max-width: var(--container--width);
+
+	.section-hero-image + & {
+		max-width: calc(50% - var(--layout--padding) * 0.5);
+		padding-top: var(--spacing-9);
+		padding-right: var(--spacing-9);
+		padding-bottom: var(--spacing-9);
+	}
+
+	/* Subtitle. */
+	> p:first-child {
+		color: var(--color-secondary);
+		font-size: var(--font-small);
+		font-weight: var(--font-weight-medium);
+	}
+
+	.form-subscribe {
+		margin-top: var(--spacing-9);
+	}
+}
+
+.section-hero-image {
+	flex: 1 0 0%;
+	max-width: 100%;
+	margin: 0;
+	order: 1;
+
+	img {
+		width: 100%;
+		border-radius: var(--radius-5);
+		background-color: var(--color-background-100);
+		aspect-ratio: 16/9;
+		object-fit: cover;
+	}
+}
+
+/* Membership. */
+.section-hero-content-membership {
+	width: 100%;
+	max-width: var(--container--width);
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 0;
+	padding-bottom: 0;
+	text-align: center;
+}
+
+/* Meta. (for author page) */
+.section-hero-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 var(--spacing-4);
+	margin-bottom: calc(var(--spacing-4) * -1);
+	font-size: var(--font-small);
+	font-weight: var(--font-weight-medium);
+}
+
+@media (--breakpoint-max-lg) {
+	.section-hero-content,
+	.section-hero-image + .section-hero-content {
+		max-width: 70%;
+	}
+
+	.section-hero-image {
+		flex: 0 0 100%;
+	}
+}
+
+@media (--breakpoint-max-md) {
+	.section-hero-content,
+	.section-hero-image + .section-hero-content {
+		max-width: 100%;
+		padding-right: 0;
+	}
+}

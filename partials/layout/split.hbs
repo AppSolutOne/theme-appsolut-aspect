@@ -1,0 +1,51 @@
+{{#page}}
+	{{#if feature_image}}
+		{{> "components/image" class="layout-split-image" src=feature_image alt=title}}
+	{{else}}
+		<div class="layout-split-image"></div>
+	{{/if}}
+{{else}}
+	<div class="layout-split-image"></div>
+{{/page}}
+
+{{#contentFor "body-class"}}layout-split{{/contentFor}}
+
+<div class="layout-split-content">
+	{{!-- Layout for pages signin and signup. --}}
+	<a href="{{@site.url}}" class="button button-transparent button-sm layout-split-button">
+		{{> "icons/arrow-left"}}
+		<span class="label">{{t "Back to Home"}}</span>
+	</a>
+
+	{{#if @member}}
+		{{!-- Paid member. --}}
+		{{#if @member.paid}}
+			<h1>{{@member.name}}</h1>
+			<p>{{t "You currently have a paid subscription."}}</p>
+
+		{{!-- Free member. --}}
+		{{else}}
+			<h1>{{@member.name}}</h1>
+			<p>{{t "You currently have a free membership, upgrade to a paid subscription for full access."}}</p>
+		{{/if}}
+
+		<form>
+			<a href="#/portal/account/" class="button">{{t 'Manage your account'}}</a>
+			<a href="javascript:" data-members-signout>{{t 'Sign out'}}</a>
+		</form>
+	{{else}}
+		{{> @partial-block}}
+	{{/if}}
+
+	{{!-- Footer. --}}
+	<footer class="footer layout-split-footer">
+		{{> "layout/footer-copyright"}}
+	</footer>
+
+	{{!-- Post content. --}}
+	{{#page}}
+		{{#if html}}
+			<div class="post-content">{{content}}</div>
+		{{/if}}
+	{{/page}}
+</div>

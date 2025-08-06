@@ -1,0 +1,51 @@
+/* stylelint-disable at-rule-no-unknown */
+.main {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: var(--sidebar--width) minmax(0, 1fr);
+	min-height: 100vh;
+
+	#announcement-bar-root:not(:empty) + & {
+		min-height: calc(100vh - var(--announcement-bar--height, 0px));
+	}
+}
+
+.content,
+.sidebar {
+	grid-row: 2 / 2;
+}
+
+.main > .footer {
+	grid-column: 2;
+	grid-row: 3 / 3;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	max-width: 3080px;
+	width: 100%;
+	margin: 0 auto;
+	gap: var(--layout--gap);
+	padding: var(--spacing-7) var(--layout--padding) var(--layout--padding);
+
+	/* Need for visible when skip button to content. */
+	scroll-margin: var(--navbar--min-height);
+}
+
+@mixin sidebar-collapsed {
+	.main {
+		grid-template-columns: var(--sidebar-collapsed--width) minmax(0, 1fr);
+	}
+}
+
+@media (--breakpoint-max-md) {
+	.content {
+		grid-column: span 2;
+		padding-left: var(--layout--padding);
+	}
+
+	.main > .footer {
+		grid-column: span 2;
+	}
+}

@@ -1,0 +1,30 @@
+{{#if posts}}
+	{{#> "settings/post-card"}}
+		<section class="section section-posts section-posts-{{#if photo_card_list}}list{{else}}grid{{/if}}">
+			{{#if ../title}}
+				<h2>{{../title}}</h2>
+			{{else}}
+				<h2 class="screen-reader-text">{{t "Posts"}}</h2>
+			{{/if}}
+
+			{{!-- Pagination prev (show for paged, disable for home). --}}
+			{{#unless is_home}}{{#is "paged"}}{{pagination next=false prepend=".posts-list"}}{{/is}}{{/unless}}
+
+			{{!-- Posts list. --}}
+			<ul class="posts-list"{{#if is_home}}{{#unless photo_card_list}}{{#if pagination.next}} data-posts-per-page="{{@config.posts_per_page}}"{{/if}}{{/unless}}{{/if}}>
+				{{#foreach posts}}
+					<li>
+						{{> "components/card-post" style=../post_card_style}}
+					</li>
+				{{/foreach}}
+			</ul>
+
+			{{!-- Pagination next. --}}
+			{{#if is_home}}
+				{{pagination type="load-more-infinite" prev=false append=".posts-list"}}
+			{{else}}
+				{{pagination type="infinite" prev=false append=".posts-list"}}
+			{{/if}}
+		</section>
+	{{/"settings/post-card"}}
+{{/if}}

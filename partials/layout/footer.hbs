@@ -1,0 +1,9 @@
+<footer class="footer">
+	{{> "layout/footer-copyright"}}
+
+	{{#if @site.secondary_navigation}}
+	<nav class="navigation navigation-footer navigation-secondary" aria-label="{{t "Footer Secondary Navigation"}}">
+		{{navigation type="secondary" sidebar=false hide_current=true dropdown=true show_icon=false}}
+	</nav>
+	{{/if}}
+</footer>

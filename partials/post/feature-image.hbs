@@ -1,0 +1,10 @@
+<div class="post-featured">
+	{{~#if feature_image}}
+	<figure class="post-featured-image">
+		{{> "components/image" fast="true" src=feature_image alt=feature_image_alt altElse=title}}
+		{{#if feature_image_caption}}
+			<figcaption>{{feature_image_caption}}</figcaption>
+		{{/if}}
+	</figure>
+	{{/if~}}
+</div>

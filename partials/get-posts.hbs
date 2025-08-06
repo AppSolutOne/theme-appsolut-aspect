@@ -1,0 +1,9 @@
+{{#if posts}}
+	{{> @partial-block}}
+{{else}}
+	{{#get "posts" limit=@config.posts_per_page page=page include="tags,tiers,authors"}}
+		{{#if posts}}
+			{{> @partial-block}}
+		{{/if}}
+	{{/get}}
+{{/if}}

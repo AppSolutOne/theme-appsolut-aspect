@@ -1,0 +1,10 @@
+<div class="tooltip-custom tooltip-custom-author" style="display:none;">
+	<a href="{{url}}" class="tooltip-avatar" aria-label="{{name}}" tabindex="-1">
+		{{> "components/avatar" size="large" src=profile_image}}
+	</a>
+	<a href="{{url}}" class="tooltip-title">{{name}}</a>
+	{{#if bio}}
+	<div>{{bio}}</div>
+	{{/if}}
+	{{> "components/social-links-author" hide_label=true}}
+</div>

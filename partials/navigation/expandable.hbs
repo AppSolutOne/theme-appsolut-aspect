@@ -1,0 +1,34 @@
+{{!--
+	Collapse or Dropdown.
+
+	Info: </div> and </ul> are closed automatically in the navigation.hbs.
+
+	Variables:
+		- nav: data included in {{navigation}}.
+		- item: data included in the link.
+		- this: all data.
+--}}
+
+{{#if open_tag}}
+	{{!-- Dropdown. --}}
+	{{#if nav.dropdown}}
+		<div
+			class="dropdown"
+			aria-labelledby="{{concat "nav-dropdown-toggle-" item.slug "-" @index}}"
+			id="{{concat "nav-dropdown-content-" item.slug "-" @index}}"
+		>
+			<ul>
+
+	{{!-- Collapse. --}}
+	{{else}}
+		<div
+			class="collapse"
+			aria-labelledby="{{concat "nav-collapse-toggle-" item.slug "-" @index}}"
+			id="{{concat "nav-collapse-content-" item.slug "-" @index}}"
+		>
+			<ul>
+	{{/if}}
+
+{{else}}
+	</ul></div>
+{{/if}}

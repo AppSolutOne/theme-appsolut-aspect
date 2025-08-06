@@ -1,0 +1,25 @@
+{{#*inline "get-card-slug"}}
+	{{#match setting "Classic"}}
+		{{> @partial-block post_card_style="classic"}}
+	{{else match setting "Classic Simple"}}
+		{{> @partial-block post_card_style="classic-simple"}}
+	{{else match setting "Overlay"}}
+		{{> @partial-block post_card_style="overlay"}}
+	{{else match setting "Overlay Simple"}}
+		{{> @partial-block post_card_style="overlay-simple"}}
+	{{else match setting "List"}}
+		{{> @partial-block photo_card_list=true post_card_style="list"}}
+	{{else match setting "List Simple"}}
+		{{> @partial-block photo_card_list=true post_card_style="list-simple"}}
+	{{/match}}
+{{/inline}}
+
+{{#if post_card_style}}
+	{{#> "get-card-slug" setting=post_card_style}}
+		{{> @partial-block}}
+	{{/"get-card-slug"}}
+{{else}}
+	{{#> "get-card-slug" setting=@custom.post_card_style}}
+		{{> @partial-block}}
+	{{/"get-card-slug"}}
+{{/if}}
