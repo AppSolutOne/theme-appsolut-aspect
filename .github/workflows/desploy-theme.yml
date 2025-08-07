@@ -1,25 +1,14 @@
-name: Deploy Ghost Theme
-
+name: Deploy Theme
 on:
   push:
     branches:
       - main
       - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      - name: Build theme
-        run: npm run build:prod
       - name: Deploy Ghost Theme
         uses: TryGhost/action-deploy-theme@v1
         with:
