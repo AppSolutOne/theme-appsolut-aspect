@@ -22,7 +22,7 @@
   "Please check your inbox and click the confirmation link.": "Veuillez vérifier votre boîte de réception et cliquer sur le lien de confirmation.",
   "Sending": "Envoi en cours",
   "Already a member?": "Déjà membre ?",
-  "/signin/": "/connexion/",
+  "/signin/": "/signin/",
   "Sign in": "Se connecter",
   "Welcome back to our blog! Sign in to access your saved articles, personal reading list, and join the discussion.": "Bienvenue sur notre blog ! Connectez-vous pour accéder à vos articles sauvegardés, votre liste de lecture personnelle et rejoindre la discussion.",
   "Sign into your account again and see the entire library of members-only content & updates.": "Connectez-vous à nouveau à votre compte et consultez toute la bibliothèque de contenu et mises à jour réservés aux membres.",
