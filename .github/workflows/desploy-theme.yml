@@ -11,6 +11,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: TryGhost/action-deploy-theme@v1
         with:
-          api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
-          api-key: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          api-url: ${{ https://appsolut-one.ghost.io }}
+          api-key: ${{ 693150a0ee7e850001d78017:c0301b8155dbfdd59368b4e617995bf14e489eceecf98f2ea4d07f9a2184ffd0 }}
           theme-name: "aspect"
