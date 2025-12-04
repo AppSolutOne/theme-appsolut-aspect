@@ -14,7 +14,7 @@
 {{/page}}
 
 {{!-- Authors sections. --}}
-{{#get "authors" include="count.posts" limit="all" order="count.posts DESC"}}
+{{#get "authors" include="count.posts" limit="100" order="count.posts DESC"}}
 	{{#foreach authors visibility="all"}}
 		<section class="section section-author">
 			<div class="section-head">
