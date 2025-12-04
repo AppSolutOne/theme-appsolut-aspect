@@ -13,7 +13,7 @@
 {{#if setting}}
 	{{!-- All popular tags. --}}
 	{{#match setting "-1"}}
-		{{#get "tags" limit="all" filter="visibility:public" include="count.posts" order="count.posts DESC"}}
+		{{#get "tags" limit="100" filter="visibility:public" include="count.posts" order="count.posts DESC"}}
 			{{> @partial-block }}
 		{{/get}}
 
@@ -21,7 +21,7 @@
 	{{else match (concat setting.[0] setting.[1] setting.[2] setting.[3]) "asc:"}}
 		{{!-- all. --}}
 		{{#match (concat setting.[3] setting.[4] setting.[5]) ":-1"}}
-			{{#get "tags" limit="all" filter="visibility:public" include="count.posts" order="name ASC"}}
+			{{#get "tags" limit="100" filter="visibility:public" include="count.posts" order="name ASC"}}
 				{{> @partial-block }}
 			{{/get}}
 		{{!-- count. --}}
@@ -35,7 +35,7 @@
 	{{else match (concat setting.[0] setting.[1] setting.[2] setting.[3] setting.[4]) "desc:"}}
 		{{!-- all. --}}
 		{{#match (concat setting.[4] setting.[5] setting.[6]) ":-1"}}
-			{{#get "tags" limit="all" filter="visibility:public" include="count.posts" order="name DESC"}}
+			{{#get "tags" limit="100" filter="visibility:public" include="count.posts" order="name DESC"}}
 				{{> @partial-block }}
 			{{/get}}
 		{{!-- count. --}}
@@ -53,7 +53,7 @@
 
 	{{!-- Select specific tags. --}}
 	{{else}}
-		{{#get "tags" limit="all" filter="slug:[{{setting}}]" include="count.posts"}}
+		{{#get "tags" limit="100" filter="slug:[{{setting}}]" include="count.posts"}}
 			{{> @partial-block }}
 		{{/get}}
 	{{/match}}
