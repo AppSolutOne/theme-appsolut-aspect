@@ -18,7 +18,7 @@
 		}}
 --}}
 
-{{#get "tiers" include="monthly_price,yearly_price,benefits" filter="visibility:public" limit="all" as |tiers|}}
+{{#get "tiers" include="monthly_price,yearly_price,benefits" filter="visibility:public" limit="100" as |tiers|}}
 	{{#if tiers}}
 		{{!-- Inputs (for toggle monthly and yearly) --}}
 		<input class="pricing-toggle-input pricing-toggle-input-monthly" value="monthly" name="pricing-toggle" type="radio" id="pricing-toggle-monthly"{{#match @site.portal_default_plan "monthly"}} checked{{/match}}>
