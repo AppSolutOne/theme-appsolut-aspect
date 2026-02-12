@@ -33,7 +33,7 @@
 
 	{{!-- Form. --}}
 	{{#if @site.members_enabled}}
-		<form data-members-form="signin">
+		<form data-members-form="signin" data-members-autoredirect="false">
 			<input data-members-email placeholder="{{t 'Your email'}}" type="email" id="email" required />
 
 			<span class="form-alert">

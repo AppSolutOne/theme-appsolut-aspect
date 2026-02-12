@@ -8,8 +8,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	{{!-- Custom title for page 404. --}}
+	{{#if (block "title")}}
+		<title>{{block "title"}}</title>
+
 	{{!-- Basic meta - advanced meta is output with {{ghost_head}} below --}}
-	<title>{{meta_title page=(t " (Page %)")}}</title>
+	{{else}}
+		<title>{{meta_title page=(t " (Page %)")}}</title>
+	{{/if}}
 
 	{{!-- Script for theme data --}}
 	{{> "theme-head-script"}}
@@ -37,7 +43,7 @@
 	<link rel="preload" as="script" href="{{asset "built/index.js"}}">
 
 	{{!-- Preload font. --}}
-	<link rel="preload" href="{{asset "vendors/Geist-Variable.woff2"}}" as="font" type="font/woff2" crossorigin/>
+	<link rel="preload" href="{{asset "vendors/Geist-Variable.woff2"}}" as="font" type="font/woff2" crossorigin>
 
 	{{!-- Preload main styles and scripts for better performance --}}
 	<style>
@@ -186,7 +192,7 @@
 			{{!-- Navigation. --}}
 			{{#if @site.navigation}}
 			<nav class="navigation navigation-sidebar" aria-label="{{t "Sidebar Primary Navigation"}}">
-				{{navigation sidebar=true show_icon=true}}
+				{{navigation name="sidebar" sidebar=true show_icon=true}}
 			</nav>
 			{{/if}}
 
@@ -234,7 +240,7 @@
 		</aside>
 
 		{{!-- Content. --}}
-		<{{#is "home"}}div{{else}}article{{/is}} id="content" class="content{{#is "post"}} post{{/is}}">
+		<{{#is "home"}}div{{else}}article{{/is}} id="content" class="content {{post_class}}">
 			{{{body}}}
 		</{{#is "home"}}div{{else}}article{{/is}}>
 
@@ -256,7 +262,7 @@
 				{{!-- Navigation. --}}
 				{{#if @site.navigation}}
 				<nav class="navigation navigation-popup" aria-label="{{t "Popup Primary Navigation"}}">
-					{{navigation sidebar=false dropdown=false show_icon=true}}
+					{{navigation name="popup" sidebar=false dropdown=false show_icon=true}}
 				</nav>
 				{{/if}}
 
@@ -283,6 +289,9 @@
 
 		<button class="popup-overlay popup-close" aria-label="{{t "Hide popup"}}" tabindex="-1"></button>
 	</div>
+
+	{{!-- PVS. --}}
+	<script src="{{asset "assets/vendors/pvs-footer.min.js"}}"></script>
 
 	{{!-- Motion. --}}
 	<script src="{{asset "assets/vendors/motion.min.js"}}"></script>

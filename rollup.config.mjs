@@ -82,6 +82,7 @@ const buildConfig = {
 		// PVS
 		{ src: 'node_modules/pvs/dist/pvs.min.js', dest: 'assets/vendors' },
 		{ src: 'node_modules/pvs/dist/pvs.min.css', dest: 'assets/vendors' },
+		{ src: 'node_modules/pvs/dist/pvs-footer.min.js', dest: 'assets/vendors' },
 		// Geist font
 		{
 			src: 'node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2',

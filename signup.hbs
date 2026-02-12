@@ -33,7 +33,7 @@
 	{{!-- Form. --}}
 	{{#if @site.members_enabled}}
 		{{^if @site.members_invite_only}}
-			<form data-members-form="signup">
+			<form data-members-form="signup" data-members-autoredirect="false">
 				<input data-members-name placeholder="{{t 'Your name'}}" type="text" id="name" />
 				<input data-members-email placeholder="{{t 'Your email'}}" type="email" id="email" required />
 

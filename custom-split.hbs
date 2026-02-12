@@ -8,8 +8,8 @@
 		{{#contentFor "body-class"}} post-template-split{{#> "with-sidebar"}} post-has-sidebar{{/"with-sidebar"}}{{#unless access}} post-locked{{/unless}}{{/contentFor}}
 
 		<header class="post-header">
-			{{!-- Feature image. --}}
-			{{> "post/feature-image"}}
+			{{!-- Media (featured image and video). --}}
+			{{> "post/media"}}
 
 			<div class="post-header-container">
 				{{!-- Tags. --}}
@@ -30,7 +30,7 @@
 							{{> "post/meta-author"}}
 						{{/if}}
 						<li>
-							<time class="post-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+							<time class="post-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format=(t "MMMM D, YYYY")}}</time>
 						</li>
 						{{#if reading_time}}
 						<li class="separator">&bull;</li>
