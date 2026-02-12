@@ -1,6 +1,7 @@
 {{!< default-simple}}
 {{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
 
+{{#contentFor "title"}}{{statusCode}} — {{message}}{{/contentFor}}
 {{#contentFor "body-class"}}layout-error{{/contentFor}}
 
 <h1>{{statusCode}}</h1>

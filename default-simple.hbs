@@ -15,8 +15,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	{{!-- Custom title for page 404. --}}
+	{{#if (block "title")}}
+		<title>{{block "title"}}</title>
+
 	{{!-- Basic meta - advanced meta is output with {{ghost_head}} below --}}
-	<title>{{meta_title page=(t " (Page %)")}}</title>
+	{{else}}
+		<title>{{meta_title page=(t " (Page %)")}}</title>
+	{{/if}}
 
 	{{!-- Script for theme data --}}
 	{{> "theme-head-script"}}
@@ -48,6 +54,9 @@
 		}
 	</style>
 
+	{{!-- PVS styles. --}}
+	<link rel="stylesheet" type="text/css" href="{{asset "assets/vendors/pvs.min.css"}}">
+
 	{{!-- Theme styles. --}}
 	<link rel="stylesheet" type="text/css" href="{{asset "built/index.css"}}">
 
@@ -64,9 +73,9 @@
 <body class="{{block "body-class"}}">
 	<main class="main">
 		{{!-- Content. --}}
-		<article id="content" class="content">
+		<div id="content" class="content">
 			{{{body}}}
-		</article>
+		</div>
 	</main>
 
 	{{!-- Announcement bar. --}}

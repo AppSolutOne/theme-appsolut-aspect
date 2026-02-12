@@ -6,7 +6,8 @@
 
 {{#contentFor "body-class"}} post-template-image{{#> "with-sidebar"}} post-has-sidebar{{/"with-sidebar"}}{{#unless access}} post-locked{{/unless}}{{/contentFor}}
 
-{{> "post/feature-image"}}
+{{!-- Media (featured image and video). --}}
+{{> "post/media"}}
 
 {{#if html}}
 	<div class="post-content-grid">
@@ -31,7 +32,7 @@
 					{{> "post/meta-author"}}
 				{{/if}}
 				<li>
-					<time class="post-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+					<time class="post-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format=(t "MMMM D, YYYY")}}</time>
 				</li>
 				{{#if reading_time}}
 				<li class="separator">&bull;</li>
